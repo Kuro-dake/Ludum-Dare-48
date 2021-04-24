@@ -5,33 +5,56 @@ using UnityEngine;
 public abstract class GameCursor : MonoBehaviour
 {
 
-    Dictionary<KeyCode, System.Action> actions;
+    Dictionary<KeyCode, System.Action> click_actions;
+    Dictionary<KeyCode, System.Action> hold_actions;
 
     protected virtual void LeftClick()
     {
-        Debug.Log("left");
+
     }
 
     protected virtual void RightClick()
     {
-        Debug.Log("right");
+
+    }
+
+    protected virtual void LeftHold()
+    {
+
+    }
+
+    protected virtual void RightHold()
+    {
+
     }
 
     private void Start()
     {
-       actions = new Dictionary<KeyCode, System.Action>()
+       click_actions = new Dictionary<KeyCode, System.Action>()
         {
             {KeyCode.Mouse0, LeftClick },
             {KeyCode.Mouse1, RightClick }
         };
+        hold_actions = new Dictionary<KeyCode, System.Action>()
+        {
+            {KeyCode.Mouse0, LeftHold },
+            {KeyCode.Mouse1, RightHold }
+        };
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        foreach(KeyValuePair<KeyCode,System.Action> kv in actions)
+        foreach(KeyValuePair<KeyCode,System.Action> kv in click_actions)
         {
             if (Input.GetKeyDown(kv.Key))
+            {
+                kv.Value();
+            }
+        }
+        foreach (KeyValuePair<KeyCode, System.Action> kv in hold_actions)
+        {
+            if (Input.GetKey(kv.Key))
             {
                 kv.Value();
             }

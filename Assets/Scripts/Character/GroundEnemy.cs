@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class GroundEnemy : Enemy
 {
-    [SerializeField]
-    float attacks_per_second = 1f, attack_range = 1f;
-
-    float next_attack = 0f;
-
-    Character target => GM.player;
-
-    private void Update()
+    
+    protected override IEnumerator Pursue()
     {
-        if(Vector2.Distance(target.transform.position, transform.position) < attack_range)
+        while (true)
         {
-            if(next_attack < 0f) {
-                next_attack = attacks_per_second;
-                target.ReceiveAttack(AttackData.Create(attack, "hit"));
+            while (airborne)
+            {
+                yield return null;
+            }
+            yield return new WaitForSeconds(pursuit_delay);
+            MoveTo(Vector2.MoveTowards(GM.player.transform.position, transform.position, 1f));
+            while (SC.routines.IsRunning(char_movement_routine_name))
+            {
+                yield return null;
             }
         }
     }
+
+    
 
 
 

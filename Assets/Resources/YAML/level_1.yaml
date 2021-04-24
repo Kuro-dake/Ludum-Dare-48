@@ -1,0 +1,20 @@
+level:
+ blocks:
+  - enemies:
+     - type: floatershooter1
+       hp: 3
+       position: 5, 5
+
+     - type: floatershooter1
+       hp: 3
+       position: -5, 5
+
+  - enemies:
+     - type: enemy1
+       hp: 3
+       position: 6, 9
+
+     - type: enemy1
+       hp: 3
+       position: -6, 9
+

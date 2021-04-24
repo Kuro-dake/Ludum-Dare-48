@@ -20,9 +20,17 @@ public class Controls : Service
         {
             if (Input.GetKey(kv.Key))
             {
-                //GM.player.Movement(kv.Value);
+                GM.player.Movement(kv.Value);
             }
         }
         
+    }
+
+    public IEnumerator WaitForSpacebar()
+    {
+        while (!Input.GetKeyDown(KeyCode.Space))
+        {
+            yield return null;
+        }
     }
 }

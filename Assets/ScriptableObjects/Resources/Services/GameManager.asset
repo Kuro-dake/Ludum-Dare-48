@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _active: 1
   service_transform_prefab: {fileID: 0}
+  _ground_y: -3.84
+  _fall_speed: 5

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64c6a0ad47b6c2744afef9a6ed0fad67, type: 3}
+  m_Name: EnvManager
+  m_EditorClassIdentifier: 
+  _active: 1
+  service_transform_prefab: {fileID: 0}
+  env_block_prefab: {fileID: 965587105622802130, guid: 87d098f606c4d4d4a95c14e39d4d0465, type: 3}
+  _destroy_block_distance: 35
+  env_block_width: 30
+  _ground_y: -3.84
+  _fall_speed: 5

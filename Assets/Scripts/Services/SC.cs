@@ -137,5 +137,10 @@ public class SC : MonoBehaviour
 
     public static GameManager game => Get<GameManager>();
     public static UIManager ui => Get<UIManager>();
+    public static PoolManager pool => Get<PoolManager>();
+    public static EnemyManager enemies => Get<EnemyManager>();
+    public static EnvManager env => Get<EnvManager>();
+    public static PlayerStatsManager player_stats => Get<PlayerStatsManager>();
+    public static Controls controls => Get<Controls>();
 
 }

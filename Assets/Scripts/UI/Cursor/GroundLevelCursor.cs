@@ -4,21 +4,37 @@ using UnityEngine;
 
 public class GroundLevelCursor : GameCursor
 {
-    protected override void LeftClick()
+
+    float attack_delay = 0f;
+
+    protected override void LeftHold()
     {
-        base.LeftClick();
+        base.LeftHold();
+        if(attack_delay <= 0f)
+        {
+            Carrier.Create(GM.player.transform.position, AttackData.Create(1, "hit", GM.player), Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            attack_delay = SC.player_stats.attack_delay;
+        }
         
-
-        Vector2 groundpos = pos;
-        groundpos.y = GM.player.transform.position.y;
-
-        GM.player.MoveTo(groundpos);
 
     }
 
     protected override void RightClick()
     {
         base.RightClick();
-        SC.ui.SwitchCursor(UIManager.cursor_type.star);
+
+
+        /*Vector2 groundpos = pos;
+        groundpos.y = GM.player.transform.position.y;
+
+        GM.player.MoveTo(groundpos);*/
+
+
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        attack_delay -= Time.deltaTime;
     }
 }
