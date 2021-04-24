@@ -2,17 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ability : MonoBehaviour
+[System.Serializable]
+public abstract class Ability : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    float cooldown;
+    float current_cooldown;
+    
+    public bool ready { get => current_cooldown <= 0f; }
+
+    public void Cast()
     {
-        
+        SC.routines.StartCoroutine(CastStep());
+    }
+    protected abstract IEnumerator CastStep();
+
+    private void Update()
+    {
+        current_cooldown -= Time.deltaTime;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

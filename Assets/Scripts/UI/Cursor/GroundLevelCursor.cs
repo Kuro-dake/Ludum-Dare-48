@@ -12,7 +12,7 @@ public class GroundLevelCursor : GameCursor
         base.LeftHold();
         if(attack_delay <= 0f)
         {
-            Carrier.Create(GM.player.transform.position, AttackData.Create(1, "hit", GM.player), Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            Carrier.Create(GM.player.aim_transform.position, AttackData.Create(0, "hit", GM.player), Camera.main.ScreenToWorldPoint(Input.mousePosition), "stun");
             attack_delay = SC.player_stats.attack_delay;
         }
         

@@ -13,7 +13,7 @@ public class Carrier : MonoBehaviour, PoolableInterface
     // Update is called once per frame
     [SerializeField]
     impact_type impact = impact_type.on_hit;
-
+    public bool piercing = false;
     void Update()
     {
         switch (impact)
@@ -36,7 +36,10 @@ public class Carrier : MonoBehaviour, PoolableInterface
                     if (c != null && (attack_data.origin is Player && c != attack_data.origin || c is Player && attack_data.origin != GM.player) )
                     {
                         Affect(c);
-                        is_active = false;
+                        if (!piercing) {
+                            is_active = false;
+                        }
+                        
                         return;
                     }
                 }
@@ -54,6 +57,8 @@ public class Carrier : MonoBehaviour, PoolableInterface
     bool affect_once = true;
     List<Character> affected = new List<Character>();
     Dictionary<Character, float> affected_at = new Dictionary<Character, float>();
+    [SerializeField]
+    bool stun = false;
     protected virtual void Affect(Character c)
     {
         Debug.Log("affecting" + c);
@@ -91,6 +96,10 @@ public class Carrier : MonoBehaviour, PoolableInterface
     {
         Debug.Log("affecting");
         c.ReceiveAttack(attack_data);
+        if (stun)
+        {
+            c.Stun(1f);
+        }
     }
 
     [SerializeField]
@@ -109,8 +118,9 @@ public class Carrier : MonoBehaviour, PoolableInterface
             transform.localScale = Vector3.one * Mathf.MoveTowards(transform.localScale.x, explosion_scale, Time.deltaTime * explosion_speed);
             /*Debug.Log(Character.all_characters.Count + " chars");
             Debug.Log(Character.all_characters.FindAll(c => Vector2.Distance(transform.position, c.transform.position) < explosion_scale).Count + " in range");*/
-            Character.all_characters.FindAll(c => Vector2.Distance(transform.position, c.transform.position) < explosion_scale)
+            Character.all_characters.FindAll(c => Vector2.Distance(transform.position, c.transform.position) < transform.localScale.x * .5f)
                 .ForEach(c => Affect(c));
+            Debug.DrawRay(transform.position, Vector2.right * transform.localScale.x * .5f, Color.red);
             yield return null;
         }
         gameObject.SetActive(false);

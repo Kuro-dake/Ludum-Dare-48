@@ -19,7 +19,31 @@ public abstract class Enemy : Character
     public override void Initialize()
     {
         base.Initialize();
-        StartCoroutine(Pursue());
+        StartPursuit();
+    }
+    public string pursuit_routine => "pursuit_" + GetHashCode();
+    void StartPursuit()
+    {
+        SC.routines.StartCoroutine(Pursue(), pursuit_routine);
+    }
+
+    public override void Stun(float duration)
+    {
+        base.Stun(duration);
+        StartCoroutine(RestartPursuitStun());
+    }
+    void StopPursuit()
+    {
+        SC.routines.StopCoroutine(pursuit_routine);
+    }
+    IEnumerator RestartPursuitStun()
+    {
+        StopPursuit();
+        while(stunned)
+        {
+            yield return null;
+        }
+        StartPursuit();
     }
 
     protected override void Update()
@@ -34,6 +58,16 @@ public abstract class Enemy : Character
             }
             
         }
-        next_attack -= Time.deltaTime;
+        if (!stunned)
+        {
+            next_attack -= Time.deltaTime;
+        }
+        
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        StopPursuit();
     }
 }

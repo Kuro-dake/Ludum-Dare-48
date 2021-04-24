@@ -2,17 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StunAbility : MonoBehaviour
+public class StunAbility : Ability
 {
-    // Start is called before the first frame update
-    void Start()
+    
+    protected override IEnumerator CastStep()
     {
-        
-    }
+        Vector2 origin = GM.player.aim_transform.position;
 
-    // Update is called once per frame
-    void Update()
-    {
+        Promise<Vector2> target = SC.ui.GetAbilityTarget();
+
+        while (!target.fulfilled && !target.broken)
+        {
+            yield return null;
+        }
+        if (target.broken)
+        {
+            yield break;
+        }
+        Carrier.Create(origin + Random.insideUnitCircle * .5f, AttackData.Create(0, "stun", GM.player), target, "stun");
+        
         
     }
 }

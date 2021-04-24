@@ -899,3 +899,21 @@ public static class Vector2IntExtensions
         return ret;
     }
 }
+
+public static class KeycodeExtension
+{
+    public static string KeyShortcut(this KeyCode kc)
+    {
+        switch (kc)
+        {
+            case KeyCode.Alpha1:
+                return "1";
+            case KeyCode.Alpha2:
+                return "2";
+            case KeyCode.Alpha3:
+                return "3";
+            default:
+                return kc.ToString();
+        }
+    }
+}

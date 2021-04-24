@@ -41,13 +41,16 @@ public abstract class GameCursor : MonoBehaviour
             {KeyCode.Mouse1, RightHold }
         };
     }
+    //protected static Dictionary<KeyCode, GameCursor> down_senders;
+
+
 
     // Update is called once per frame
     protected virtual void Update()
     {
         foreach(KeyValuePair<KeyCode,System.Action> kv in click_actions)
         {
-            if (Input.GetKeyDown(kv.Key))
+            if (Input.GetKeyUp(kv.Key))
             {
                 kv.Value();
             }

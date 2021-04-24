@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class Player : Character
 {
+
+    public Transform aim_transform => transform.Find("aim");
+
+    [SerializeField]
+    float aim_distance;
+
+    protected override void Update()
+    {
+        base.Update();
+        aim_transform.position = transform.position.Vector2() + (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).Vector2().normalized * aim_distance; //Vector3.MoveTowards(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), 2f);
+    }
+
     public void Movement(Vector2 dir)
     {
         transform.position += dir.Vector3() * Time.deltaTime * speed;

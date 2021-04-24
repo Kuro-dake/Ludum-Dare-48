@@ -12,7 +12,7 @@ public class UIManager : Service
     [System.NonSerialized]
     List<GameCursor> cursors = new List<GameCursor>();
 
-    
+
     public Canvas canvas => service_transform.GetComponent<Canvas>();
 
     public Image curtain_image => service_transform.Find("Curtain").GetComponent<Image>();
@@ -42,14 +42,15 @@ public class UIManager : Service
     float dts_multiplier = 1f;
     IEnumerator ShowDialogueLineStep(string text)
     {
-        if(dialogue_t < 1f) {
+        if (dialogue_t < 1f) {
             dialogue_on = false;
             dts_multiplier = 2f;
-            while(dialogue_t < 1f)
+            while (dialogue_t < 1f)
             {
                 yield return null;
             }
         }
+        dialogue_transform.GetComponent<UIBlockAnimations>().away_rotation = Random.insideUnitSphere * 90f;
         text_dialogue = text;
         dialogue_on = true;
         while (dialogue_t > 0f)
@@ -65,11 +66,13 @@ public class UIManager : Service
         StartCoroutine(RunDialogueStep(lines));
     }
 
+
+
     IEnumerator RunDialogueStep(List<string> lines)
     {
         Queue<string> dialogue_queue = new Queue<string>(lines);
 
-        while(dialogue_queue.Count > 0)
+        while (dialogue_queue.Count > 0)
         {
             ShowDialogueLine(dialogue_queue.Dequeue());
             yield return SC.controls.WaitForSpacebar();
@@ -84,7 +87,7 @@ public class UIManager : Service
         DontDestroyOnLoad(service_transform);
         cursor_prefabs.ForEach(cp => cursors.Add(Instantiate(cp, service_transform)));
         curtain = false;
-        
+
     }
     public override void Update()
     {
@@ -94,27 +97,49 @@ public class UIManager : Service
         dialogue_t = Mathf.MoveTowards(dialogue_t, dialogue_on ? 0f : 1f, Time.deltaTime * dialogue_transition_speed * dts_multiplier);
         dialogue_transform.GetComponent<UIBlockAnimations>().t = dialogue_t;
     }
-    public void SwitchCursor(cursor_type type)
-    {
+    public GameCursor cursor { get; protected set; } = null;
+    IEnumerator DelaySwitchCursor(cursor_type type) {
+        yield return null;
         cursors.ForEach(c => c.gameObject.SetActive(false));
-        GameCursor cursor = null;
+        
         switch (type)
         {
-            
+
             case cursor_type.ground:
                 cursor = cursors.Find(c => c is GroundLevelCursor);
                 break;
             case cursor_type.star:
                 cursor = cursors.Find(c => c is StarLevelCursor);
                 break;
+            case cursor_type.ability_target:
+                cursor = cursors.Find(c => c is AbilityTargetCursor);
+                break;
+            case cursor_type.ui:
+                cursor = cursors.Find(c => c is UICursor);
+                break;
         }
         cursor?.gameObject.SetActive(true);
+    }
+    public void SwitchCursor(cursor_type type)
+    {
+        StartCoroutine(DelaySwitchCursor(type));
+        
+    }
+
+    public Promise<Vector2> ability_target_promise { get; protected set; }
+
+    public Promise<Vector2> GetAbilityTarget()
+    {
+        SwitchCursor(cursor_type.ability_target);
+        return ability_target_promise = new Promise<Vector2>();
     }
 
     public enum cursor_type
     {
         ground,
-        star
+        star,
+        ability_target,
+        ui
     }
     IEnumerator FIOCStep(System.Action callback)
     {

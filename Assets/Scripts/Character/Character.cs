@@ -10,6 +10,20 @@ public class Character : MonoBehaviour
     [SerializeField]
     protected int hp_max, hp, attack = 1;
 
+    protected int shield = 0;
+
+    public void GainShield(int value)
+    {
+        shield = shield > value ? shield : value;
+    }
+
+    float stun_duration = 0f;
+
+    public virtual void Stun(float duration)
+    {
+        stun_duration = stun_duration > duration ? stun_duration : duration;
+    }
+
     static List<Character> _all_characters = new List<Character>();
 
     public static List<Character> all_characters
@@ -40,7 +54,7 @@ public class Character : MonoBehaviour
 
     IEnumerator MoveToStep(Vector2 to)
     {
-        while(this != null && (!airborne || move_type == movement_type.floating) && Vector2.Distance(transform.position, to) > 0f)
+        while(this != null && (!airborne || move_type == movement_type.floating) && !stunned && Vector2.Distance(transform.position, to) > 0f)
         {
             transform.position = Vector3.MoveTowards(transform.position, to, Time.deltaTime * speed);
             yield return null;
@@ -50,12 +64,27 @@ public class Character : MonoBehaviour
     public void ReceiveAttack(AttackData ad)
     {
 
-        hp -= ad.damage;
+        int remnant = ad.damage;
+        if(shield > 0)
+        {
+            shield -= remnant;
+            if(shield < 0)
+            {
+                remnant = Mathf.Abs(shield);
+            }
+            else
+            {
+                remnant = 0;
+            }
+        }
+        
+        hp -= remnant;
         if (hp <= 0)
         {
             Die();
         }
     }
+    public bool stunned => stun_duration > 0f;
     public bool airborne => transform.position.y > SC.env.ground_y;
     // Update is called once per frame
     protected virtual void Update()
@@ -66,6 +95,7 @@ public class Character : MonoBehaviour
             pos.y = Mathf.MoveTowards(transform.position.y, SC.env.ground_y, Time.deltaTime * SC.env.fall_speed);
             transform.position = pos;
         }
+        stun_duration -= Time.deltaTime;
     }
 
     protected virtual void Die()

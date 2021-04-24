@@ -50,7 +50,7 @@ public class UIBlockAnimations : MonoBehaviour
     }
 
     [SerializeField]
-    Vector3 away_rotation;
+    public Vector3 away_rotation;
     [SerializeField]
     public Vector2[] screen_positions;
 

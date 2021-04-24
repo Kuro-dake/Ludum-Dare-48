@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-
+using TMPro;
 public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     AbilitiesBlock.UIButtonAction _action;
@@ -13,21 +13,25 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         set
         {
             _action = value;
-            GetComponentInChildren<Text>().text = action.shortcut.ToString();
+            GetComponentInChildren<TextMeshProUGUI>().text = action.shortcut.KeyShortcut();
         }
     }
-
+    public void Initialize(AbilitiesBlock parent)
+    {
+        StartCoroutine(DelayedShortcutSwap(parent));
+    }
+    IEnumerator DelayedShortcutSwap(AbilitiesBlock parent)
+    {
+        yield return null;
+        transform.Find("Shortcut").SetParent(parent.shortcuts_parent);
+    }
     private void Update()
     {
-        if(action.shortcut == KeyCode.D)
-        {
-            Debug.Log("mouse 0 " + Input.GetKey(KeyCode.Mouse0));
-            Debug.Log("over " + over);
-            Debug.Log("holdable " + action.holdable);
-        }
+        
         if ((Input.GetKey(KeyCode.Mouse0) && over || Input.GetKey(action.shortcut)) && action.holdable || Input.GetKeyDown(action.shortcut))
         {
             action.action?.Invoke();
+            action.ability?.Cast();
         }
     }
     bool _over = false;

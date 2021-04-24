@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlashAbility : MonoBehaviour
+public class FlashAbility : Ability
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override IEnumerator CastStep()
     {
-        
-    }
+        Promise<Vector2> target = SC.ui.GetAbilityTarget();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        while (!target.fulfilled && !target.broken)
+        {
+            yield return null;
+        }
+        if (target.broken)
+        {
+            yield break;
+        }
+        GM.player.transform.position = target.val;
     }
 }

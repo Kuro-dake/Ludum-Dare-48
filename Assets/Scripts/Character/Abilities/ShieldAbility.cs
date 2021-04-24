@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldAbility : MonoBehaviour
+public class ShieldAbility : Ability
 {
-    // Start is called before the first frame update
-    void Start()
+    public int shield_value = 10;
+    protected override IEnumerator CastStep()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GM.player.GainShield(shield_value);
+        yield return null;
     }
 }

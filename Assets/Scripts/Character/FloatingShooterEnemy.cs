@@ -26,6 +26,7 @@ public class FloatingShooterEnemy : Enemy
                 yield return null;
             }
             yield return new WaitForSeconds(move_shoot_delay);
+            
             for(int i = 0;i<projectile_number; i++)
             {
                 Carrier.Create(transform.position, AttackData.Create(attack, "hit", this), target.transform.position + (Random.insideUnitCircle * .3f).Vector3());
