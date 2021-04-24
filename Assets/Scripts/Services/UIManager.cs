@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 [CreateAssetMenu(fileName = "UIManager", menuName = "Service/UIManager", order = 0)]
 
 public class UIManager : Service
@@ -25,6 +26,57 @@ public class UIManager : Service
         curtain = false;
         curtain_t = 0f;
     }
+    Transform dialogue_transform => service_transform.Find("Dialogue");
+    TextMeshProUGUI tmpro => dialogue_transform.Find("Text").GetComponent<TextMeshProUGUI>();
+    string text_dialogue { get => tmpro.text; set => tmpro.text = value; }
+    [SerializeField]
+    float dialogue_t = 1f;
+    [SerializeField]
+    bool dialogue_on = false;
+    public void ShowDialogueLine(string text)
+    {
+        StartCoroutine(ShowDialogueLineStep(text), "ui_dialogue");
+    }
+    [SerializeField]
+    float dialogue_transition_speed = 2f;
+    float dts_multiplier = 1f;
+    IEnumerator ShowDialogueLineStep(string text)
+    {
+        if(dialogue_t < 1f) {
+            dialogue_on = false;
+            dts_multiplier = 2f;
+            while(dialogue_t < 1f)
+            {
+                yield return null;
+            }
+        }
+        text_dialogue = text;
+        dialogue_on = true;
+        while (dialogue_t > 0f)
+        {
+            yield return null;
+        }
+        dts_multiplier = 1f;
+
+    }
+
+    public void RunDialogue(List<string> lines)
+    {
+        StartCoroutine(RunDialogueStep(lines));
+    }
+
+    IEnumerator RunDialogueStep(List<string> lines)
+    {
+        Queue<string> dialogue_queue = new Queue<string>(lines);
+
+        while(dialogue_queue.Count > 0)
+        {
+            ShowDialogueLine(dialogue_queue.Dequeue());
+            yield return SC.controls.WaitForSpacebar();
+            yield return null;
+        }
+        dialogue_on = false;
+    }
 
     public override void GameStartInitialize()
     {
@@ -32,12 +84,15 @@ public class UIManager : Service
         DontDestroyOnLoad(service_transform);
         cursor_prefabs.ForEach(cp => cursors.Add(Instantiate(cp, service_transform)));
         curtain = false;
+        
     }
     public override void Update()
     {
         base.Update();
         curtain_t = Mathf.MoveTowards(curtain_t, curtain ? 1f : 0f, Time.deltaTime);
         curtain_image.color = Color.Lerp(Color.clear, Color.black, curtain_t);
+        dialogue_t = Mathf.MoveTowards(dialogue_t, dialogue_on ? 0f : 1f, Time.deltaTime * dialogue_transition_speed * dts_multiplier);
+        dialogue_transform.GetComponent<UIBlockAnimations>().t = dialogue_t;
     }
     public void SwitchCursor(cursor_type type)
     {
@@ -60,6 +115,22 @@ public class UIManager : Service
     {
         ground,
         star
+    }
+    IEnumerator FIOCStep(System.Action callback)
+    {
+        SC.ui.curtain = true;
+        while (!SC.ui.curtain_visible)
+        {
+            yield return null;
+        }
+        callback?.Invoke();
+
+        SC.ui.curtain = false;
+    }
+    public const string ui_fioc_routine_name = "ui_fioc_routine";
+    public void FadeInOutCallback(System.Action callback)
+    {
+        StartCoroutine(FIOCStep(callback), ui_fioc_routine_name);
     }
 }
 

@@ -14,7 +14,7 @@ public class UISortingOrder : MonoBehaviour
         Sort();
     }
 
-    static void Sort()
+    public static void Sort()
     {
         all_sortings.RemoveAll(s => s == null);
         all_sortings.Sort((a, b) => a.order.CompareTo(b.order));

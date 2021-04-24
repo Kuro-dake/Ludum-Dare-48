@@ -9,6 +9,7 @@ public class PlayerStatsManager : Service
     float _attack_delay;
     public float attack_delay => _attack_delay;
 
-
+    [SerializeField]
+    List<Ability> abilities;
 
 }

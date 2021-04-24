@@ -18,3 +18,6 @@ MonoBehaviour:
   - {fileID: 3069684926224519341, guid: 852ab31742f62144a8d70b04b82079fe, type: 3}
   - {fileID: -6787455331659694209, guid: bab1903e14ce08340ad22040956d169e, type: 3}
   curtain: 0
+  dialogue_t: 1
+  dialogue_on: 0
+  dialogue_transition_speed: 1.6

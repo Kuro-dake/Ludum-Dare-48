@@ -33,9 +33,15 @@ public class EnvManager : Service
         EnvBlock neb = Instantiate(env_block_prefab, e.transform.position + env_block_width * (left ? -1 : 1) * Vector3.right, Quaternion.identity);
         neb.Initialize(e);
 
-        SC.enemies.SpawnBlockEnemies(neb.block_number);
-
+        if (SC.enemies.SpawnBlockEnemies(neb.block_number))
+        {
+            SC.ui.RunDialogue(SC.enemies.GetBlockPresetByNumber(neb.block_number).dialogue_lines);
+        }
+        
+        
         return neb;
     }
+
+    
 
 }

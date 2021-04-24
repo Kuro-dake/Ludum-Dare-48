@@ -5,7 +5,7 @@ using System.Linq;
 public class EnvBlock : MonoBehaviour
 {
 
-    public int block_number { get; protected set; } = 0;
+    public int block_number { get; protected set; } = -1;
     public bool active = false;
     Dictionary<Collider2D, EnvBlock> triggered_colliders = new Dictionary<Collider2D, EnvBlock>();
 

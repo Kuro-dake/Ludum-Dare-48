@@ -1,6 +1,12 @@
 level:
  blocks:
-  - enemies:
+  - dialogue: 
+     - "Lorem ipsum dolor sit ammet, consectetur elit"
+     - "Second lorem ipsum"
+     - "3Second lorem ipsum"
+     - "4Second lorem ipsum"
+     - "Final"
+    enemies:
      - type: floatershooter1
        hp: 3
        position: 5, 5

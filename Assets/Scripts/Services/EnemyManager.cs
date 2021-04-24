@@ -27,21 +27,22 @@ public class EnemyManager : Service
         //block_presets.ForEach(b => b.enemies.ForEach(e => Debug.Log(e.type)));
 
     }
-
-    public void SpawnBlockEnemies(int block_number)
+    public BlockPreset GetBlockPresetByNumber(int number) => block_presets[number];
+    public bool SpawnBlockEnemies(int block_number)
     {
-        block_number -= 1;
         if (block_presets.Count <= block_number || block_number < 0)
         {
-            return;
+            return false;
         }
         Debug.Log("spawned bn " + block_number);
-        BlockPreset bp = block_presets[block_number];
+        BlockPreset bp = GetBlockPresetByNumber(block_number);
 
         foreach(EnemyPreset ep in bp.enemies)
         {
             Generate(ep.type, GM.player.transform.position + ep.position.Vector3());
         }
+
+        return true;
 
     }
 }

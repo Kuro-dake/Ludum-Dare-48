@@ -355,8 +355,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title_text_prefabs:
-  - {fileID: 721917680718612741, guid: 7d3fc6adfa0b48c4da5a2fd1dcd92670, type: 3}
-  - {fileID: 4390379534329828510, guid: 2734f248ccfc9ac47aeb6cd29008da33, type: 3}
+  - list:
+    - {fileID: 721917680718612741, guid: 7d3fc6adfa0b48c4da5a2fd1dcd92670, type: 3}
+    - {fileID: 4390379534329828510, guid: 2734f248ccfc9ac47aeb6cd29008da33, type: 3}
+  - list:
+    - {fileID: 721917680718612741, guid: c6053805d3700444ba27526ee3c21d0d, type: 3}
+    - {fileID: 4390379534329828510, guid: 846ae7911d784104c9efbfba7de86f9b, type: 3}
 --- !u!4 &1081982193
 Transform:
   m_ObjectHideFlags: 0

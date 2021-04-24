@@ -19,4 +19,9 @@ public class LevelGM : GM
 
     }
 
+
+    public void Debugs()
+    {
+        Debug.Log("debugs");
+    }
 }

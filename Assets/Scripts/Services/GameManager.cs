@@ -16,23 +16,20 @@ public class GameManager : Service
         Debug.Log("working");
         
     }
-
+    [System.NonSerialized]
+    string load_scene_name;
+    System.Action load_scene_callback;
+    void LoadSceneCallback()
+    {
+        load_scene_callback?.Invoke();
+        SceneManager.LoadScene(load_scene_name);
+    }
     public void LoadScene(string scene, System.Action callback = null)
     {
-        SC.routines.StartCoroutine(LoadSceneStep(scene, callback));
+        load_scene_callback = callback;
+        load_scene_name = scene;
+
+        SC.ui.FadeInOutCallback(LoadSceneCallback);
     }
 
-    IEnumerator LoadSceneStep(string scene, System.Action callback = null)
-    {
-        SC.ui.curtain = true;
-        while (!SC.ui.curtain_visible)
-        {
-            yield return null;
-        }
-        callback?.Invoke();
-
-        SceneManager.LoadScene(scene);
-
-        SC.ui.curtain = false;
-    }
 }

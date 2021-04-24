@@ -121,6 +121,7 @@ public abstract class Entity
 public class BlockPreset : Entity
 {
     public EntityList<EnemyPreset> enemies => new EntityList<EnemyPreset>(node.GetNode<YamlSequenceNode>("enemies"));
+    public List<string> dialogue_lines => node.HasProperty("dialogue") ? GetStringArray("dialogue") : new List<string>();
 }
 
 public class EnemyPreset : Entity
