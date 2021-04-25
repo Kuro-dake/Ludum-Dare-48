@@ -142,5 +142,5 @@ public class SC : MonoBehaviour
     public static EnvManager env => Get<EnvManager>();
     public static PlayerStatsManager player_stats => Get<PlayerStatsManager>();
     public static Controls controls => Get<Controls>();
-
+    public static EffectsManager effects => Get<EffectsManager>();
 }

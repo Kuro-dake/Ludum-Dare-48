@@ -15,7 +15,7 @@ public class Player : Character
     {
         base.Update();
         aim_transform.position = aim_center.position.Vector2() + (Camera.main.ScreenToWorldPoint(Input.mousePosition) - aim_center.position).Vector2().normalized * aim_distance; //Vector3.MoveTowards(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), 2f);
-        
+        orientation_left = aim_transform.position.x < aim_center.position.x;
     }
 
     public void Movement(Vector2 dir)
@@ -24,7 +24,7 @@ public class Player : Character
         npos.x = Mathf.Clamp(npos.x, LevelGM.cam_bounds.min.x + 1f, LevelGM.cam_bounds.max.x - 1f);
         transform.position = npos;
         walking = true;
-        orientation_left = dir.x < 0f;
+        
         
     }
 

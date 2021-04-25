@@ -19,6 +19,7 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void Initialize(AbilitiesBlock parent)
     {
         StartCoroutine(DelayedShortcutSwap(parent));
+        DisplayCooldown();
     }
     IEnumerator DelayedShortcutSwap(AbilitiesBlock parent)
     {
@@ -31,10 +32,55 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             return;
         }
-        if ((Input.GetKey(KeyCode.Mouse0) && over || Input.GetKey(action.shortcut)) && action.holdable || Input.GetKeyDown(action.shortcut))
+        if (/*(Input.GetKey(KeyCode.Mouse0) && over ||*/ Input.GetKey(action.shortcut)/*)*/ && action.holdable || Input.GetKeyDown(action.shortcut))
         {
             Trigger();
         }
+        if(action.ability != null)
+        {
+            DisplayCooldown();
+        }
+    }
+    Image screen => transform.Find("Screen").GetComponent<Image>();
+    TextMeshProUGUI cooldown => transform.Find("Cooldown").GetComponent<TextMeshProUGUI>();
+    void DisplayCooldown()
+    {
+        
+
+        if(action.ability == null)
+        {
+            screen.gameObject.SetActive(false);
+            cooldown.gameObject.SetActive(false);
+            return;
+        }
+
+        if (!action.ability.active)
+        {
+            screen.gameObject.SetActive(true);
+            cooldown.gameObject.SetActive(false);
+            return;
+        }
+
+        if (action.ability.current_cooldown <= 0f)
+        {
+            screen.gameObject.SetActive(false);
+            cooldown.gameObject.SetActive(false);
+            return;
+        }
+
+
+
+        screen.gameObject.SetActive(true);
+        cooldown.gameObject.SetActive(true);
+        float cc = action.ability.current_cooldown;
+        string ctext = Mathf.CeilToInt(cc).ToString();
+        if (cc < 1f)
+        {
+            cc *= 10;
+            ctext = "0." + Mathf.CeilToInt(cc).ToString();
+        }
+        cooldown.text = ctext;
+
     }
 
     public void Trigger()
@@ -53,7 +99,7 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         set
         {
             _over = value;
-            GetComponent<Image>().color = value ? Color.blue : Color.black;
+            //GetComponent<Image>().color = value ? Color.blue : Color.black;
         }
     }
     public void OnPointerEnter(PointerEventData data)

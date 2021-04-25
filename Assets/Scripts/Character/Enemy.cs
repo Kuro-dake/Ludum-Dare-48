@@ -21,7 +21,7 @@ public abstract class Enemy : Character
     {
         get
         {
-            _all_enemies.RemoveAll(e => e == null);
+            _all_enemies.RemoveAll(e => e == null || !e.is_alive);
             return new List<Enemy>(_all_enemies);
         }
     }
@@ -35,6 +35,8 @@ public abstract class Enemy : Character
         pursuit_delay = ep.pursuit_delay;
 
         transform.localScale = Vector3.one * ep.scale_range;
+
+        speed = ep.move_speed;
 
         Initialize();
     }
@@ -99,5 +101,6 @@ public abstract class Enemy : Character
     {
         base.Die();
         StopPursuit();
+
     }
 }

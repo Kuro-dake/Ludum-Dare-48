@@ -17,9 +17,9 @@ public class LevelGM : GM
         SC.controls.active = true;
 
         UpdateCameraConfines();
-
+        SC.enemies.InitLevel();
         SC.env.RestartLevel();
-
+        SC.env.TriggerStartBlock();
         //SC.env.ProgressEnvironment();
     }
 

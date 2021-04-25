@@ -8,7 +8,15 @@ using Cinemachine;
 
 public class GameManager : Service
 {
- 
+    [SerializeField]
+    List<NamedSprite> named_sprites;
+    public Sprite this[string s]
+    {
+        get
+        {
+            return named_sprites.Find(ns => ns.first == s)?.second;
+        }
+    }
     public CinemachineVirtualCamera cine_cam => FindObjectOfType<CinemachineVirtualCamera>();
 
     public void Test()

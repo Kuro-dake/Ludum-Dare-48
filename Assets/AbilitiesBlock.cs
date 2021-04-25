@@ -24,6 +24,11 @@ public class AbilitiesBlock : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField]
     UIButton ability_button_prefab;
 
+    public UIButtonAction GetUIButtonAction(Ability a)
+    {
+        return actions.Find(uiba => uiba.ability == a);
+    }
+
     [SerializeField]
     List<UIButtonAction> actions = new List<UIButtonAction>();
     public Transform buttons_parent => transform.Find("Buttons");
@@ -50,7 +55,7 @@ public class AbilitiesBlock : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         foreach(UIButtonAction a in actions)
         {
             UIButton ngo = Instantiate(ability_button_prefab, buttons_parent);
-            ngo.GetComponent<Button>().onClick.AddListener(ngo.Trigger);
+            ngo.GetComponent<Button>().enabled = false;// onClick.AddListener(ngo.Trigger);
             
             ngo.action = a;
             ngo.Initialize(this);

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using YamlDotNet.RepresentationModel;
+
 [CreateAssetMenu(fileName = "EnvManager", menuName = "Service/EnvManager", order = 0)]
 
 public class EnvManager : Service
@@ -27,6 +29,13 @@ public class EnvManager : Service
         env_layer_mask = LayerMask.GetMask(new string[] { "Environment" });
 
     }
+    public string level_file { get; protected set; } = "level_1";
+    public void TriggerStartBlock()
+    {
+        BlockPreset bp = Entity.Create<BlockPreset>(Setup.GetSetup(level_file).GetChainedNode<YamlMappingNode>("level:start"));
+        ProgressEnvironment(bp);
+    }
+
     [System.NonSerialized]
     int _block_number = 0;
     int block_number
@@ -59,20 +68,23 @@ public class EnvManager : Service
         Debug.Log("restarted level");
     }
 
-    public void ProgressEnvironment()
+    public void ProgressEnvironment(BlockPreset bp = null)
     {
-        StartCoroutine(ProgressEnvironmentStep(), progenv_routine);
+        StartCoroutine(ProgressEnvironmentStep(bp), progenv_routine);
     }
-
-    IEnumerator ProgressEnvironmentStep()
+    [SerializeField]
+    GroundItem ground_item_prefab;
+    IEnumerator ProgressEnvironmentStep(BlockPreset set_bp = null)
     {
         if (SC.enemies.GetBlockPresetByNumber(block_number) == null)
         {
             Debug.LogError("finish level");
             yield break;
         }
-        
-        SC.ui.RunDialogue(SC.enemies.GetBlockPresetByNumber(block_number).dialogue_lines);
+
+        BlockPreset bp = set_bp == null ? SC.enemies.GetBlockPresetByNumber(block_number) : set_bp;
+
+        SC.ui.RunDialogue(bp.dialogue_lines);
         SC.controls.active = false;
         while (SC.ui.running_dialogue)
         {
@@ -80,12 +92,23 @@ public class EnvManager : Service
         }
         SC.controls.active = true;
         yield return new WaitForSeconds(.5f);
-        SC.enemies.SpawnBlockEnemies(block_number);
+
+        if (bp.item != null)
+        {
+            GroundItem gi = Instantiate(ground_item_prefab);
+            gi.Initialize(bp.item);
+            while(FindObjectOfType<GroundItem>() != null)
+            {
+                yield return null;
+            }
+        }
+
+        SC.enemies.SpawnBlockEnemies(bp, GM.player.transform.position);
         
 
         LevelGM.UpdateCameraConfines(true);
 
-        yield return WaitForBlockFinish(); 
+        yield return WaitForBlockFinish(set_bp == null); 
     }
     public void StopProgenv()
     {
@@ -93,7 +116,7 @@ public class EnvManager : Service
         SC.enemies.StopSpawnblock();
     }
     const string progenv_routine = "wfb_envman";
-    IEnumerator WaitForBlockFinish()
+    IEnumerator WaitForBlockFinish(bool advance = true)
     {
         while (SC.enemies.in_combat)
         {
@@ -101,9 +124,12 @@ public class EnvManager : Service
         }
         
         LevelGM.UpdateCameraConfines();
-
-        block_number++;
-        triggered = false;
+        if (advance)
+        {
+            block_number++;
+            triggered = false;
+        }
+        
     }
 
 

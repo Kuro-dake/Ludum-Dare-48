@@ -14,8 +14,23 @@ public class Carrier : MonoBehaviour, PoolableInterface
     [SerializeField]
     impact_type impact = impact_type.on_hit;
     public bool piercing = false;
+    TrailRenderer tr => GetComponent<TrailRenderer>();
+    IEnumerator DelayedTRDeactivation()
+    {
+        if(tr != null)
+        {
+            yield return new WaitForSeconds(tr.time);
+            yield return null;
+        }
+        
+        is_active = false;
+    }
     void Update()
     {
+        if(lifetime <= 0f)
+        {
+            return;
+        }
         switch (impact)
         {
             case impact_type.explode:
@@ -27,27 +42,28 @@ public class Carrier : MonoBehaviour, PoolableInterface
                 }
                 break;
             case impact_type.on_hit:
-                
+
                 Vector2 direction = (target - orig_pos).normalized * Time.deltaTime * speed;
                 RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, Time.deltaTime * speed);
                 foreach(RaycastHit2D hit in hits)
                 {
                     Character c = hit.collider.GetComponent<Character>();
-                    if (c != null && (attack_data.origin is Player && c != attack_data.origin || c is Player && attack_data.origin != GM.player) )
+                    if (c != null && c.is_alive && (attack_data.origin is Player && c != attack_data.origin || c is Player && attack_data.origin != GM.player) )
                     {
                         Affect(c);
                         if (!piercing) {
                             is_active = false;
+                            return;
                         }
                         
-                        return;
                     }
                 }
                 transform.position += (direction).Vector3();
                 lifetime -= Time.deltaTime;
-                if(lifetime <= 0f)
+                if (lifetime <= 0f)
                 {
-                    is_active = false;
+                    StartCoroutine(DelayedTRDeactivation());
+                    
                 }
                 break;
     }
@@ -109,10 +125,21 @@ public class Carrier : MonoBehaviour, PoolableInterface
         StartCoroutine(ExplodeStep());
     }
 
-
+    [SerializeField]
+    Color explosion_color, explosion_color_2;
 
     IEnumerator ExplodeStep()
     {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            sr.sprite = SC.game["ring"];
+            sr.color = Color.Lerp(explosion_color, explosion_color_2, .5f) * 1.2f;
+        }
+        Effect e = SC.effects["explosion"];
+        (e as Explosion).color_1 = explosion_color;
+        (e as Explosion).color_2 = explosion_color_2;
+        e.Play(transform.position);
         while (transform.localScale.x < explosion_scale)
         {
             transform.localScale = Vector3.one * Mathf.MoveTowards(transform.localScale.x, explosion_scale, Time.deltaTime * explosion_speed);
@@ -121,8 +148,14 @@ public class Carrier : MonoBehaviour, PoolableInterface
             Character.all_characters.FindAll(c => Vector2.Distance(transform.position, c.transform.position) < transform.localScale.x * .5f)
                 .ForEach(c => Affect(c));
             Debug.DrawRay(transform.position, Vector2.right * transform.localScale.x * .5f, Color.red);
+
+            e.transform.localScale = transform.localScale;
+
+            sr.color -= Color.black * Time.deltaTime;
+
             yield return null;
         }
+        e.Stop();
         gameObject.SetActive(false);
     }
 
@@ -142,7 +175,7 @@ public class Carrier : MonoBehaviour, PoolableInterface
     {
         List<Carrier> ret = new List<Carrier>();
 
-        Carrier carrier = SC.pool.carriers.GetPooledObjectFromPrefab(type);
+        Carrier carrier = SC.pool.carriers.GetPooledObjectFromPrefab(type, true);
         carrier.orig_pos = origin;
         carrier.lifetime = carrier.impact_lifetime;
         carrier.affected.Clear();

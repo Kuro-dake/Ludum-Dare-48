@@ -61,7 +61,7 @@ public class Character : MonoBehaviour
         anim.SetBool("floater", move_type == movement_type.floating);
         shake_parent_orig_pos = shake_parent.localPosition;
 
-        StartCoroutine(Fade(0f, 1f, 2f));
+        StartCoroutine(Fade(0f, 1f, 4f));
     }
     public string char_movement_routine_name => "char_movement_" + GetHashCode();
     public void MoveTo(Vector2 to)
@@ -144,7 +144,7 @@ public class Character : MonoBehaviour
 
     protected void LateUpdate()
     {
-        Debug.Log(anim);
+
         if (anim != null)
         {
             anim.SetBool("walking", walking);

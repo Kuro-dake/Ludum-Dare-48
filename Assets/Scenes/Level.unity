@@ -15006,6 +15006,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593e367b67fe4614f800b98e85f3bff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: 
+  description: 
+  cooldown: 5
+  active: 0
   needle_delay: 0.25
   needle_number: 10
 --- !u!1 &231534915
@@ -21500,8 +21504,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f07fb808fc672c449af717682934f7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needle_delay: 0.15
-  needle_number: 10
+  _name: Laser dimension
+  description: Create a portal between this deep philosophical universe, and a dimension
+    of lasery lasers. Lasers keep shooting from the portal in the direction of your
+    choosing until the portal closes (which doesn't take that long to be honest).
+    Lasers damage and pierce your enemies.
+  cooldown: 0
+  active: 1
+  needle_delay: 0.05
+  needle_number: 20
+  color_1: {r: 1, g: 1, b: 1, a: 1}
+  color_2: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &584496363
 GameObject:
   m_ObjectHideFlags: 0
@@ -22202,6 +22215,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7652f66865e11564e82745c37c085189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: 
+  description: 
+  cooldown: 0
+  active: 1
+  color_1: {r: 1, g: 1, b: 1, a: 1}
+  color_2: {r: 0.92941177, g: 0, b: 1, a: 1}
 --- !u!1 &736000490
 GameObject:
   m_ObjectHideFlags: 0
@@ -33449,6 +33468,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ed69a782910f4428e69ab1bb5bb35f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: 
+  description: 
+  cooldown: 5
+  active: 0
   shield_value: 10
 --- !u!1 &1379344919
 GameObject:
@@ -49581,6 +49604,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 118ed9806b252e9469efe21eff53c7f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: 
+  description: 
+  cooldown: 5
+  active: 0
 --- !u!1 &2063694013
 GameObject:
   m_ObjectHideFlags: 0
@@ -49878,8 +49905,9 @@ MonoBehaviour:
   pursuit_delay:
     first: 0
     second: 0
-  attacks_per_second: 1
+  attack_delay: 1
   attack_range: 1
+  next_attack: 0
 --- !u!1 &2309114440672321221
 GameObject:
   m_ObjectHideFlags: 0
@@ -50137,7 +50165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4523375140667061041, guid: 94770fddeb3d51846a64787ebbc4eb39, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4523375140667061047, guid: 94770fddeb3d51846a64787ebbc4eb39, type: 3}
       propertyPath: m_LocalPosition.x
@@ -50388,6 +50416,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &6606071040782471563
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6606071039058173714, guid: 82252ccde051df4479ed53d56dd24371, type: 3}
+      propertyPath: m_Name
+      value: explosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606071039058173719, guid: 82252ccde051df4479ed53d56dd24371, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606071039058173719, guid: 82252ccde051df4479ed53d56dd24371, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606071039058173719, guid: 82252ccde051df4479ed53d56dd24371, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606071039058173719, guid: 82252ccde051df4479ed53d56dd24371, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606071039058173719, guid: 82252ccde051df4479ed53d56dd24371, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606071039058173719, guid: 82252ccde051df4479ed53d56dd24371, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606071039058173719, guid: 82252ccde051df4479ed53d56dd24371, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606071039058173719, guid: 82252ccde051df4479ed53d56dd24371, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606071039058173719, guid: 82252ccde051df4479ed53d56dd24371, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606071039058173719, guid: 82252ccde051df4479ed53d56dd24371, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606071039058173719, guid: 82252ccde051df4479ed53d56dd24371, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 82252ccde051df4479ed53d56dd24371, type: 3}
 --- !u!1 &7127213115833351416
 GameObject:
   m_ObjectHideFlags: 0

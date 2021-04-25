@@ -22,3 +22,5 @@ MonoBehaviour:
       second: {fileID: 827372096345035850, guid: 0e4676d39b87fb9479907c7da0c17add, type: 3}
     - first: stun
       second: {fileID: 827372096345035850, guid: 55d9bfa2017f0c64a840392387cd910a, type: 3}
+    - first: laser
+      second: {fileID: 827372096345035850, guid: fbdf22b50710df24ea38c6c31cc18143, type: 3}

@@ -20,7 +20,7 @@ public class GroundLevelCursor : GameCursor
 
             mousePosition.z = mousePosition.z - (Camera.main.transform.position.z - 45);
 
-            Carrier.Create(GM.player.aim_transform.position, AttackData.Create(1, "hit", GM.player), Camera.main.ScreenToWorldPoint(mousePosition), "bullet");
+            Carrier.Create(GM.player.aim_transform.position, AttackData.Create(1, "hit", GM.player), Camera.main.ScreenToWorldPoint(mousePosition), "exploder");
             attack_delay = SC.player_stats.attack_delay;
         }
         

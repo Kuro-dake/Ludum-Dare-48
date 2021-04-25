@@ -122,6 +122,7 @@ public class BlockPreset : Entity
 {
     public EntityList<EnemyPositionPreset> enemies => node.HasProperty("enemies") ? new EntityList<EnemyPositionPreset>(node.GetNode<YamlSequenceNode>("enemies")) : new EntityList<EnemyPositionPreset>();
     public List<string> dialogue_lines => node.HasProperty("dialogue") ? GetStringArray("dialogue") : new List<string>();
+    public ItemPreset item => node.HasProperty("item") ? Entity.Create<ItemPreset>(node.GetNode<YamlMappingNode>("item")) : null;
 }
 public class EnemyPositionPreset : Entity
 {
@@ -157,4 +158,10 @@ public class EnemyPreset : Entity
     public FloatRange move_shoot_delay => node.TryGetFloatRange("move_shoot_delay", .3f, .6f);
     public float bullet_spread => node.TryGetFloat("bullet_spread", .3f);
 
+}
+
+public class ItemPreset : Entity
+{
+    public List<string> dialogue_lines => node.HasProperty("dialogue") ? GetStringArray("dialogue") : new List<string>();
+    public string effect => node.TryGet("effect", "none");
 }

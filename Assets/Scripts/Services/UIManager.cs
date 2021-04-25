@@ -90,6 +90,9 @@ public class UIManager : Service
         cursor_prefabs.ForEach(cp => cursors.Add(Instantiate(cp, service_transform)));
         curtain = false;
 
+        dialogue_on = false;
+        dialogue_t = 1f;
+
     }
     public override void Update()
     {
@@ -132,8 +135,10 @@ public class UIManager : Service
 
     public Promise<Vector2> GetAbilityTarget()
     {
-        SwitchCursor(cursor_type.ability_target);
-        return ability_target_promise = new Promise<Vector2>();
+        //SwitchCursor(cursor_type.ability_target);
+        ability_target_promise = new Promise<Vector2>();
+        ability_target_promise.val = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        return ability_target_promise; 
     }
 
     public enum cursor_type

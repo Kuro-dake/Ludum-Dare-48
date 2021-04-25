@@ -28,12 +28,15 @@ public class Pool<T> where T : MonoBehaviour, PoolableInterface, new()
     List<PoolPrefab<T>> prefabs = new List<PoolPrefab<T>>();
     public Transform carrier_parent => _carrier_parent == null ? (_carrier_parent = new GameObject(typeof(T).ToString() + "Pool").transform) : _carrier_parent;
 
-    public T GetPooledObjectFromPrefab(string name = "default")
+    public T GetPooledObjectFromPrefab(string name = "default", bool force_new = false)
     {
         T prefab = prefabs.Find(p => p.first == name).second;
         prefab_pool.RemoveAll(p => p.second == null);
         T ret = prefab_pool.Find(obj => !obj.second.is_active && obj.first == prefab)?.second;
-
+        if (force_new)
+        {
+            ret = null;
+        }
         if (ret == null)
         {
             ret = Object.Instantiate(prefab);
