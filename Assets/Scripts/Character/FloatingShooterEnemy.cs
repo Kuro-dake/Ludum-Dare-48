@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FloatingShooterEnemy : Enemy
 {
+    protected override movement_type move_type => movement_type.floating;
     [SerializeField]
     int projectile_number = 1;
     [SerializeField]
@@ -13,6 +14,24 @@ public class FloatingShooterEnemy : Enemy
     FloatRange angle_range = new FloatRange(-0.15f, 0.15f);
     FloatRange radius_range = new FloatRange(5f, 7f);
     FloatRange move_shoot_delay = new FloatRange(.3f, .6f);
+
+    public override void Initialize(EnemyPreset ep)
+    {
+        angle_range = ep.angle_range;
+        radius_range = ep.radius_range;
+
+        move_shoot_delay = ep.move_shoot_delay;
+
+        projectile_type = ep.bullet_type;
+        projectile_delay = ep.bullet_delay;
+
+        spread = ep.bullet_spread;
+
+        projectile_number = ep.bullets_number;
+
+        base.Initialize(ep);
+    }
+
     protected override IEnumerator Pursue()
     {
         while (true)
@@ -29,7 +48,8 @@ public class FloatingShooterEnemy : Enemy
             
             for(int i = 0;i<projectile_number; i++)
             {
-                Carrier.Create(transform.position, AttackData.Create(attack, "hit", this), target.transform.position + (Random.insideUnitCircle * .3f).Vector3());
+                Carrier.Create(transform.position, AttackData.Create(attack, "hit", this), target.transform.position + (Random.insideUnitCircle * spread).Vector3(), projectile_type);
+                anim.SetTrigger("attack");
                 yield return new WaitForSeconds(projectile_delay);
             }
         }

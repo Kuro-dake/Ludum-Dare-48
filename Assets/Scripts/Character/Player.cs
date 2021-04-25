@@ -15,6 +15,7 @@ public class Player : Character
     {
         base.Update();
         aim_transform.position = aim_center.position.Vector2() + (Camera.main.ScreenToWorldPoint(Input.mousePosition) - aim_center.position).Vector2().normalized * aim_distance; //Vector3.MoveTowards(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), 2f);
+        
     }
 
     public void Movement(Vector2 dir)

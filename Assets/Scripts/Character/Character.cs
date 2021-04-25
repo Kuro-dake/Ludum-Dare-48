@@ -25,7 +25,20 @@ public class Character : MonoBehaviour
     }
 
     static List<Character> _all_characters = new List<Character>();
-
+    string shake_routine => "shake_" + GetHashCode();
+    public void Shake()
+    {
+        SC.routines.StartCoroutine(ShakeRoutine(.5f), shake_routine);
+    }
+    IEnumerator ShakeRoutine(float duration)
+    {
+        while(duration > 0f)
+        {
+            shake_parent.transform.localPosition = shake_parent_orig_pos + Random.insideUnitCircle * duration * 1f; 
+            duration -= Time.deltaTime;
+            yield return null;
+        }
+    }
     public static List<Character> all_characters
     {
         get
@@ -38,13 +51,17 @@ public class Character : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
-
+    Vector2 shake_parent_orig_pos;
     public virtual void Initialize()
     {
         hp = hp_max;
         _all_characters.Add(this);
+        anim.SetBool("floater", move_type == movement_type.floating);
+        shake_parent_orig_pos = shake_parent.localPosition;
+
+        StartCoroutine(Fade(0f, 1f, 2f));
     }
     public string char_movement_routine_name => "char_movement_" + GetHashCode();
     public void MoveTo(Vector2 to)
@@ -80,7 +97,10 @@ public class Character : MonoBehaviour
                 remnant = 0;
             }
         }
-        
+        if(remnant > 0)
+        {
+            Shake();
+        }
         hp -= remnant;
         if (hp <= 0)
         {
@@ -89,7 +109,7 @@ public class Character : MonoBehaviour
     }
     public bool stunned => stun_duration > 0f;
     public bool airborne => transform.position.y > SC.env.ground_y;
-    Animator anim => GetComponent<Animator>();
+    public Animator anim => GetComponent<Animator>();
     protected bool walking = false;
     protected Transform shake_parent => transform.Find("shake_parent");
     protected bool orientation_left
@@ -108,6 +128,10 @@ public class Character : MonoBehaviour
     }
     protected virtual void Update()
     {
+        if (!is_alive)
+        {
+            return;
+        }
         if(move_type == movement_type.ground)
         {
             Vector3 pos = transform.position;
@@ -127,14 +151,51 @@ public class Character : MonoBehaviour
         }
         walking = false;
     }
-
+    protected void OnDestroy()
+    {
+        Clear();
+    }
     protected virtual void Die()
     {
+        Clear();
+        StartCoroutine(DieStep());
+    }
+    protected IEnumerator DieStep()
+    {
+
+        Shake();
+
+        yield return Fade(1f, 0f);
+
         Destroy(gameObject);
     }
+
+    IEnumerator Fade(float current, float to, float speed = 1f)
+    {
+        StaticPSDAnimation spsda = shake_parent.Find("anim_parent").Find("player").GetComponentInChildren<StaticPSDAnimation>();
+        List<SpriteRenderer> srs = new List<SpriteRenderer>(spsda.GetComponentsInChildren<SpriteRenderer>(true));
+
+        while (current != to)
+        {
+            current = Mathf.MoveTowards(current, to, Time.deltaTime * speed);
+            srs.ForEach(delegate (SpriteRenderer sr)
+            {
+                Color c = sr.color;
+                c.a = current;
+                sr.color = c;
+            });
+            yield return null;
+        }
+    }
+
+    protected virtual void Clear()
+    {
+        SC.routines.StopCoroutine(shake_routine);
+        SC.routines.StopCoroutine(char_movement_routine_name);
+    }
     public bool is_alive => hp > 0;
-    [SerializeField]
-    protected movement_type move_type = movement_type.ground;
+    
+    protected virtual movement_type move_type => movement_type.ground;
 
 }
 

@@ -9,21 +9,23 @@ public class EnemyManager : Service
 {
 
     EntityList<BlockPreset> block_presets;
-
-    public void Generate(string name, Vector2 position)
+    EntityList<EnemyPreset> enemy_presets;
+    public void Generate(EnemyPositionPreset epp, Vector2 position)
     {
-        Enemy n_enemy = Instantiate(Resources.Load<Enemy>("Enemies/" + name.UCFirst()), service_transform);
+        
+        Enemy n_enemy = Instantiate(Resources.Load<Enemy>("Enemies/" + epp.enemy_preset.type.UCFirst()), service_transform);
 
         n_enemy.transform.position = position;
 
-        n_enemy.Initialize();
+        n_enemy.Initialize(epp.enemy_preset);
 
     }
-
+    public EnemyPreset GetEnemyPresetById(string id) => enemy_presets.Find(ep => ep.id == id);
     public override void GameStartInitialize()
     {
         base.GameStartInitialize();
         block_presets = new EntityList<BlockPreset>(Setup.GetSetup("level_1").GetChainedNode<YamlSequenceNode>("level:blocks"));
+        enemy_presets = new EntityList<EnemyPreset>(Setup.GetSetup("enemy_presets").GetChainedNode<YamlSequenceNode>("enemy_presets"));
 
         //block_presets.ForEach(b => b.enemies.ForEach(e => Debug.Log(e.type)));
 
@@ -40,26 +42,26 @@ public class EnemyManager : Service
         Debug.Log("spawned bn " + block_number);
         BlockPreset bp = GetBlockPresetByNumber(block_number);
 
-        Dictionary<int, List<EnemyPreset>> ens_by_wave = new Dictionary<int, List<EnemyPreset>>();
+        Dictionary<int, List<EnemyPositionPreset>> ens_by_wave = new Dictionary<int, List<EnemyPositionPreset>>();
 
-        foreach (EnemyPreset ep in bp.enemies)
+        foreach (EnemyPositionPreset ep in bp.enemies)
         {
             if (!ens_by_wave.ContainsKey(ep.wave))
             {
-                ens_by_wave.Add(ep.wave, new List<EnemyPreset>());
+                ens_by_wave.Add(ep.wave, new List<EnemyPositionPreset>());
             }
             ens_by_wave[ep.wave].Add(ep);
             
         }
         
-        List<KeyValuePair<int, List<EnemyPreset>>> ens_list = ens_by_wave.ToList();
+        List<KeyValuePair<int, List<EnemyPositionPreset>>> ens_list = ens_by_wave.ToList();
         ens_list.Sort((a, b) => a.Key.CompareTo(b.Key));
 
-        foreach(List<EnemyPreset> ep_list in ens_list.ConvertAll(kv => kv.Value))
+        foreach(List<EnemyPositionPreset> ep_list in ens_list.ConvertAll(kv => kv.Value))
         {
-            foreach(EnemyPreset ep in ep_list)
+            foreach(EnemyPositionPreset ep in ep_list)
             {
-                Generate(ep.type, GM.player.transform.position + ep.position.Vector3());
+                Generate(ep, GM.player.transform.position + ep.position.Vector3());
                 yield return new WaitForSeconds(.3f);
             }
             while(Enemy.all_enemies.Count > 0)

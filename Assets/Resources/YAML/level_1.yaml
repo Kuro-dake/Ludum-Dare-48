@@ -1,41 +1,27 @@
 level:
  blocks:
+#level 1
   - dialogue:
      - "Halt"
     enemies:
-     - type: enemy1
-       hp: 3
-       position: 5, 5
-#  - dialogue: 
-#     - "Lorem ipsum dolor sit ammet, consectetur elit"
-#    enemies:
-#     - type: floatershooter1
-#       hp: 3
-#       position: 5, 5
-#       wave: 1
-#
-#     - type: floatershooter1
-#       hp: 3
-#       position: -5, 5
-#       wave: 1
-#
-#     - type: enemy1
-#       hp: 3
-#       position: 5, 5
-#       wave: 2
-#
-#     - type: enemy1
-#       hp: 3
-#       position: -5, 5
-#       wave: 2
-
-
-  - enemies:
-     - type: enemy1
-       hp: 3
-       position: 6, 9
-
-     - type: enemy1
-       hp: 3
-       position: -6, 9
-
+     - id: melee_1
+       position: 5,5
+       wave: 1
+     - id: melee_1
+       position: -5,5
+       wave: 1
+     - id: melee_1
+       position: 5,5
+       wave: 2
+     - id: melee_1
+       position: -5,5
+       wave: 2
+     - id: melee_1
+       position: 6,5
+       wave: 2
+     - id: melee_1
+       position: -6,5
+       wave: 2
+     - id: kamikaze_1
+       position: 0,7
+       wave: 2

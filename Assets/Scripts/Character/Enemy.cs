@@ -8,8 +8,8 @@ public abstract class Enemy : Character
     protected FloatRange pursuit_delay;
 
     [SerializeField]
-    float attacks_per_second = 1f, attack_range = 1f;
-
+    float attack_delay = 1f, attack_range = 1f;
+    [SerializeField]
     float next_attack = 0f;
 
     protected Character target => GM.player;
@@ -25,7 +25,19 @@ public abstract class Enemy : Character
             return new List<Enemy>(_all_enemies);
         }
     }
+    public virtual void Initialize(EnemyPreset ep)
+    {
+        hp_max = ep.hp;
+        attack = ep.attack;
+        attack_delay = ep.attack_delay;
+        attack_range = ep.attack_range;
 
+        pursuit_delay = ep.pursuit_delay;
+
+        transform.localScale = Vector3.one * ep.scale_range;
+
+        Initialize();
+    }
     public override void Initialize()
     {
         base.Initialize();
@@ -60,12 +72,15 @@ public abstract class Enemy : Character
     protected override void Update()
     {
         base.Update();
-        if (Vector2.Distance(target.transform.position, transform.position) < attack_range)
+        List<Character> chars = new List<Collider2D>(Physics2D.OverlapCircleAll(transform.position, attack_range)).ConvertAll(c2d=>c2d.GetComponent<Character>());
+
+        if (chars.Contains(target))
         {
             if (next_attack < 0f)
             {
-                next_attack = attacks_per_second;
+                next_attack = attack_delay;
                 target.ReceiveAttack(AttackData.Create(attack, "hit", this));
+                anim.SetTrigger("attack");
             }
             
         }
@@ -75,8 +90,9 @@ public abstract class Enemy : Character
         }
         
     }
-    private void OnDestroy()
+    protected override void Clear()
     {
+        base.Clear();
         StopPursuit();
     }
     protected override void Die()

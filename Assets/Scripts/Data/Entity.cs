@@ -120,15 +120,41 @@ public abstract class Entity
 
 public class BlockPreset : Entity
 {
-    public EntityList<EnemyPreset> enemies => node.HasProperty("enemies") ? new EntityList<EnemyPreset>(node.GetNode<YamlSequenceNode>("enemies")) : new EntityList<EnemyPreset>();
+    public EntityList<EnemyPositionPreset> enemies => node.HasProperty("enemies") ? new EntityList<EnemyPositionPreset>(node.GetNode<YamlSequenceNode>("enemies")) : new EntityList<EnemyPositionPreset>();
     public List<string> dialogue_lines => node.HasProperty("dialogue") ? GetStringArray("dialogue") : new List<string>();
 }
+public class EnemyPositionPreset : Entity
+{
+    public string id => node.Get("id");
+    public EnemyPreset enemy_preset => SC.enemies.GetEnemyPresetById(id);
+    public Vector2 position => node.GetVector2Int("position");
+    public int wave => node.TryGetInt("wave", 0);
 
+
+}
 public class EnemyPreset : Entity
 {
+    public string id => node.Get("id");
     public string type => node.Get("type");
     public int hp => node.GetInt("hp");
-    public Vector2 position => node.GetVector2Int("position");
+    public int attack => node.TryGetInt("attack", 1);
+    public FloatRange pursuit_delay => node.TryGetFloatRange("pursuit_delay", .5f, 1f);
+    public int bullets_number => node.TryGetInt("bullets", 1);
+    public float bullet_delay => node.TryGetFloat("bullet_delay", .3f);
 
-    public int wave => node.TryGetInt("wave", 0);
+    public string bullet_type => node.TryGet("bullet_type", "bullet");
+
+    public float attack_range => node.TryGetFloat("attack_range", 1f);
+    public float attack_delay => node.TryGetFloat("attack_delay", 1f);
+
+    public FloatRange angle_range => node.TryGetFloatRange("angle_range", -.15f, .15f);
+    public FloatRange radius_range => node.TryGetFloatRange("angle_range", 5f, 7f);
+
+    public float move_speed => node.TryGetInt("move_speed", 5);
+
+    public FloatRange scale_range => node.TryGetFloatRange("scale_range", .95f, 1.05f);
+
+    public FloatRange move_shoot_delay => node.TryGetFloatRange("move_shoot_delay", .3f, .6f);
+    public float bullet_spread => node.TryGetFloat("bullet_spread", .3f);
+
 }

@@ -5,9 +5,18 @@ using UnityEngine;
 public class FloatingKamikazeEnemy : Enemy
 {
 
-
+    protected override movement_type move_type => movement_type.floating;
     FloatRange angle_range = new FloatRange(-0.15f, 0.15f);
     FloatRange radius_range = new FloatRange(5f, 7f);
+
+    public override void Initialize(EnemyPreset ep)
+    {
+
+        angle_range = ep.angle_range;
+        radius_range = ep.radius_range;
+
+        base.Initialize(ep);
+    }
 
     protected override IEnumerator Pursue()
     {
