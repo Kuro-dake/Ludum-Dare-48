@@ -1,68 +1,63 @@
 enemy_presets:
-    # level 1
-	- id: kamikaze_1
-      type: FloatingKamikaze
-      hp: 5
-      pursuit_delay: .5,1
-    - id: melee_1
-      type: GroundMelee
-      hp: 5
-      pursuit_delay: .2,.3
-    - id: float_shooter_1
-      type: FloatingShooter
-      hp: 3
-      pursuit_delay: .4,1
-      bullets: 2
-      bullet_delay: .5
-      move_shoot_delay: .5,.8
-      bullet_spread: 1.3
-
-    # level 2
-    - id: kamikaze_2
-      type: FloatingKamikaze
-      hp: 8
-      attack: 2
-      pursuit_delay: .5,.8
-      scale_range: 1.2,1.3
-    - id: melee_2
-      type: GroundMelee
-      hp: 10
-      attack: 2
-      pursuit_delay: .2,.3
-      scale_range: 1.2,1.3
-
-    - id: float_shooter_2
-      type: FloatingShooter
-      hp: 6
-      pursuit_delay: .4,.8
-      bullets: 5
-      bullet_delay: .3
-      scale_range: 1.2,1.3
-      move_shoot_delay: .3,.5
-      bullet_spread: 1
-
-    # level 3
-    - id: kamikaze_3
-      type: FloatingKamikaze # maybe immortal when not preparing for attack?
-      hp: 12
-      attack: 3
-      pursuit_delay: .4,.6
-      scale_range: 1.5,1.6
-
-    - id: melee_3
-      type: GroundMelee
-      hp: 20
-      attack: 4
-      pursuit_delay: .2,.3
-      scale_range: 1.5,1.6
-
-	- id: float_shooter_3
-      type: FloatingShooter
-      hp: 10
-      pursuit_delay: .2,.3
-      bullets: 8
-      bullet_delay: .15
-      bullet_type: exploder
-      scale_range: 1.5,1.6
-      move_shoot_delay: .2,.3
-      bullet_spread: .6
+  # level 1
+  - id: kamikaze_1
+    type: FloatingKamikaze
+    hp: 5
+    pursuit_delay: .5,1
+  - id: melee_1
+    type: GroundMelee
+    hp: 5
+    pursuit_delay: .2,.3
+  - id: float_shooter_1
+    type: FloatingShooter
+    hp: 3
+    pursuit_delay: .4,1
+    bullets: 2
+    bullet_delay: .5
+    move_shoot_delay: .5,.8
+    bullet_spread: 1.3
+  # level 2
+  - id: kamikaze_2
+    type: FloatingKamikaze
+    hp: 8
+    attack: 2
+    pursuit_delay: .5,.8
+    scale_range: 1.2,1.3
+  - id: melee_2
+    type: GroundMelee
+    hp: 10
+    attack: 2
+    pursuit_delay: .2,.3
+    scale_range: 1.2,1.3
+  - id: float_shooter_2
+    type: FloatingShooter
+    hp: 6
+    pursuit_delay: .4,.8
+    bullets: 5
+    bullet_delay: .3
+    scale_range: 1.2,1.3
+    move_shoot_delay: .3,.5
+    bullet_spread: 1
+  # level 3
+  - id: kamikaze_3
+    type: FloatingKamikaze # maybe immortal when not preparing for attack?
+    hp: 12
+    attack: 3
+    pursuit_delay: .4,.6
+    scale_range: 1.5,1.6
+  - id: melee_3
+    type: GroundMelee
+    hp: 20
+    attack: 4
+    pursuit_delay: .2,.3
+    scale_range: 1.5,1.6
+  - id: float_shooter_3
+    type: FloatingShooter
+    hp: 10
+    pursuit_delay: .2,.3
+    bullets: 8
+    bullet_delay: .15
+    bullet_type: exploder
+    scale_range: 1.5,1.6
+    move_shoot_delay: .2,.3
+    bullet_spread: .6
