@@ -137,7 +137,7 @@ public class EnemyPreset : Entity
 {
     public string id => node.Get("id");
     public string type => node.Get("type");
-    public int hp => node.GetInt("hp");
+    public int hp => node.GetInt("hp") * 10;
     public int attack => node.TryGetInt("attack", 1);
     public FloatRange pursuit_delay => node.TryGetFloatRange("pursuit_delay", .5f, 1f);
     public int bullets_number => node.TryGetInt("bullets", 1);

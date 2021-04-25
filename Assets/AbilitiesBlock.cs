@@ -8,7 +8,7 @@ public class AbilitiesBlock : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public static bool over;
     public void OnPointerEnter(PointerEventData data)
     {
-        SC.ui.SwitchCursor(UIManager.cursor_type.ui);
+        //SC.ui.SwitchCursor(UIManager.cursor_type.ui);
         over = true;
     }
 
@@ -16,7 +16,7 @@ public class AbilitiesBlock : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         if(SC.ui.cursor is UICursor)
         {
-            SC.ui.SwitchCursor(UIManager.cursor_type.ground);
+            //SC.ui.SwitchCursor(UIManager.cursor_type.ground);
         }
         over = false;
     }

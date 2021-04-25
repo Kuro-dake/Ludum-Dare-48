@@ -8,6 +8,25 @@ using YamlDotNet.RepresentationModel;
 
 public class EnvManager : Service
 {
+    public bool manual_env_manipulation = false;
+    [System.Serializable]
+    public class EnvPreset
+    {
+        public string desc;
+        public Color[] clouds;
+        public Color[] grass = new Color[2];
+        public Color[] tree_bark;
+        public Color ground;
+        public Color[] mountain;
+        public Color[] tree_crown = new Color[2];
+        public Color[] bush = new Color[2];
+        public Color[] sky = new Color[2];
+        public Color[] light = new Color[2];
+        public float[] light_intensity = new float[2];
+        public Color fscreen_color;
+        public int level;
+    }
+    public List<EnvPreset> env_presets;
     [SerializeField]
     EnvBlock env_block_prefab;
 
@@ -30,7 +49,7 @@ public class EnvManager : Service
 
     }
     [System.NonSerialized]
-    int level = 1;
+    int level = 4;
     public string level_file => "level_" + level.ToString();
     public void TriggerStartBlock()
     {
@@ -69,8 +88,15 @@ public class EnvManager : Service
         block_number = dev_start_block_number;
         triggered = false;
         Debug.Log("restarted level");
-    }
 
+        Forest f = FindObjectOfType<Forest>();
+        EnvSetter es = FindObjectOfType<EnvSetter>();
+
+        f.Initialize();
+        es.InitEnv();
+
+    }
+    public EnvPreset current_level_env_preset => env_presets.Find(ep=>ep.level == level);
     public void ProgressEnvironment(BlockPreset bp = null)
     {
         StartCoroutine(ProgressEnvironmentStep(bp), progenv_routine);

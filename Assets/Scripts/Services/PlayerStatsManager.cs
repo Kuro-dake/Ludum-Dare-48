@@ -18,6 +18,9 @@ public class PlayerStatsManager : Service
     {
         base.GameStartInitialize();
         owned_abilities.Add(typeof(FlashAbility).ToString(), true);
+        owned_abilities.Add(typeof(FireballAbility).ToString(), true);
+        owned_abilities.Add(typeof(StunAbility).ToString(), true);
+
         //owned_abilities.Clear();
     }
 }

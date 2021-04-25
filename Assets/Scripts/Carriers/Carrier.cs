@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Experimental.Rendering.Universal;
 public class Carrier : MonoBehaviour, PoolableInterface
 {
     Vector2 target, orig_pos;
@@ -166,10 +166,11 @@ public class Carrier : MonoBehaviour, PoolableInterface
     IEnumerator ExplodeStep()
     {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        Color mid_color = Color.Lerp(explosion_color, explosion_color_2, .5f);
         if (sr != null)
         {
             sr.sprite = SC.game["ring"];
-            sr.color = Color.Lerp(explosion_color, explosion_color_2, .5f) * 1.4f - Color.black * .2f;
+            sr.color = mid_color * 1.4f - Color.black * .2f;
             sr.enabled = true;
         }
         Effect e = SC.effects["explosion"];
@@ -177,6 +178,14 @@ public class Carrier : MonoBehaviour, PoolableInterface
         (e as Explosion).color_2 = explosion_color_2;
         e.Play(transform.position);
         float sr_color_speed = 1f * (explosion_speed / explosion_scale) * 1.2f;
+
+        Light2D l2d = GetComponent<Light2D>();
+        if(l2d != null)
+        {
+            l2d.color = mid_color;
+        }
+        LightGlow lg = GetComponent<LightGlow>();
+
         while (transform.localScale.x < explosion_scale)
         {
             transform.localScale = Vector3.one * Mathf.MoveTowards(transform.localScale.x, explosion_scale, Time.deltaTime * explosion_speed);
@@ -196,12 +205,18 @@ public class Carrier : MonoBehaviour, PoolableInterface
             e.transform.localScale = transform.localScale * .3f;
 
             sr.color -= Color.black * Time.deltaTime * sr_color_speed;
+            
+            if(lg != null)
+            {
+                lg.target_radius_range = new FloatRange(transform.localScale.x * 2f, transform.localScale.x * 2.4f);
+            }
 
             yield return null;
         }
         e.Stop();
         gameObject.SetActive(false);
     }
+
 
 
     static int unid = 1;

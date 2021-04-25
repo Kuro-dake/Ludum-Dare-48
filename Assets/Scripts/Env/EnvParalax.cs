@@ -14,6 +14,10 @@ public class EnvParalax : MonoBehaviour
     bool motion_only = false;
     void LateUpdate()
     {
+        if (!initialized)
+        {
+            return;
+        }
         if (!motion_only)
         {
 
@@ -34,10 +38,10 @@ public class EnvParalax : MonoBehaviour
     }
 
     List<Transform> transforms;
-
+    bool initialized = false;
     private void Start()
     {
-        Initialize();
+        //Initialize();
     }
     float width = 0f;
     [SerializeField]
@@ -45,11 +49,12 @@ public class EnvParalax : MonoBehaviour
     float modded_width => width + width_mod;
     const float adapt_to_width = 60f;
 
-    void Initialize()
+    public void Initialize()
     {
         transforms = new List<Transform>();
         if (motion_only)
         {
+            initialized = true;
             return;
         }
         if(transform.childCount != 1)
@@ -88,7 +93,7 @@ public class EnvParalax : MonoBehaviour
         }
 
         PlaceTransforms();
-
+        initialized = true;
 
         /*for(int i = 0; i < transform.childCount; i++)
         {

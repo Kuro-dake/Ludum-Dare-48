@@ -4835,6 +4835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reusable: 1
+  original_scale: 1
   destroy_on_not_playing: 0
   color_1: {r: 1, g: 0.7827398, b: 0.4188679, a: 1}
   color_2: {r: 1, g: 0.4824757, b: 0.2584905, a: 1}

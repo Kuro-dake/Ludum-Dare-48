@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1613243416515652479}
   - component: {fileID: 669517848157611972}
   - component: {fileID: 827372096345035850}
+  - component: {fileID: 1273193402129589511}
+  - component: {fileID: -8935930209425423862}
   m_Layer: 0
   m_Name: Fireball
   m_TagString: Untagged
@@ -108,6 +110,65 @@ MonoBehaviour:
   explosion_speed: 12
   explosion_color: {r: 0.990566, g: 0.30277678, b: 0.30277678, a: 1}
   explosion_color_2: {r: 1, g: 0.9203744, b: 0.3622641, a: 1}
+--- !u!114 &1273193402129589511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459894128996707980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.828
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0.4
+  m_LightVolumeOpacity: 0
+  m_ApplyToSortingLayers: 0000000075f74471170e6f5c6f2bb1b3e33aa7f38fb9b1d9
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0.5
+  m_PointLightOuterRadius: 1.51
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath: []
+--- !u!114 &-8935930209425423862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459894128996707980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b5394d8683017419131c7ca1cfaeda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target_intensity_range:
+    first: 0.6
+    second: 0.8
+  target_radius_range:
+    first: 1
+    second: 2
+  duration_range:
+    first: 0.2
+    second: 0.3
+  radius_multiplier: 1
 --- !u!1 &3316666991520167022
 GameObject:
   m_ObjectHideFlags: 0
