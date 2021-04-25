@@ -27,13 +27,26 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     private void Update()
     {
-        
+        if (!SC.controls.active)
+        {
+            return;
+        }
         if ((Input.GetKey(KeyCode.Mouse0) && over || Input.GetKey(action.shortcut)) && action.holdable || Input.GetKeyDown(action.shortcut))
         {
-            action.action?.Invoke();
-            action.ability?.Cast();
+            Trigger();
         }
     }
+
+    public void Trigger()
+    {
+        if (!SC.controls.active)
+        {
+            return;
+        }
+        action.action?.Invoke();
+        action.ability?.Cast();
+    }
+
     bool _over = false;
     bool over {
         get => _over;

@@ -120,7 +120,7 @@ public abstract class Entity
 
 public class BlockPreset : Entity
 {
-    public EntityList<EnemyPreset> enemies => new EntityList<EnemyPreset>(node.GetNode<YamlSequenceNode>("enemies"));
+    public EntityList<EnemyPreset> enemies => node.HasProperty("enemies") ? new EntityList<EnemyPreset>(node.GetNode<YamlSequenceNode>("enemies")) : new EntityList<EnemyPreset>();
     public List<string> dialogue_lines => node.HasProperty("dialogue") ? GetStringArray("dialogue") : new List<string>();
 }
 
@@ -129,4 +129,6 @@ public class EnemyPreset : Entity
     public string type => node.Get("type");
     public int hp => node.GetInt("hp");
     public Vector2 position => node.GetVector2Int("position");
+
+    public int wave => node.TryGetInt("wave", 0);
 }

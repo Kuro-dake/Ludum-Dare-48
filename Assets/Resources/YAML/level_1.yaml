@@ -1,19 +1,34 @@
 level:
  blocks:
-  - dialogue: 
-     - "Lorem ipsum dolor sit ammet, consectetur elit"
-     - "Second lorem ipsum"
-     - "3Second lorem ipsum"
-     - "4Second lorem ipsum"
-     - "Final"
+  - dialogue:
+     - "Halt"
     enemies:
      - type: floatershooter1
        hp: 3
        position: 5, 5
+#  - dialogue: 
+#     - "Lorem ipsum dolor sit ammet, consectetur elit"
+#    enemies:
+#     - type: floatershooter1
+#       hp: 3
+#       position: 5, 5
+#       wave: 1
+#
+#     - type: floatershooter1
+#       hp: 3
+#       position: -5, 5
+#       wave: 1
+#
+#     - type: enemy1
+#       hp: 3
+#       position: 5, 5
+#       wave: 2
+#
+#     - type: enemy1
+#       hp: 3
+#       position: -5, 5
+#       wave: 2
 
-     - type: floatershooter1
-       hp: 3
-       position: -5, 5
 
   - enemies:
      - type: enemy1

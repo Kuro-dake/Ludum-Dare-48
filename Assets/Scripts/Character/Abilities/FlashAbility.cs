@@ -16,6 +16,8 @@ public class FlashAbility : Ability
         {
             yield break;
         }
-        GM.player.transform.position = target.val;
+        Vector2 target_val = target.val;
+        target_val.y = SC.env.ground_y;
+        GM.player.transform.position = target_val;
     }
 }

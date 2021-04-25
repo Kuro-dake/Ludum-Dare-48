@@ -67,9 +67,10 @@ public class UIManager : Service
     }
 
 
-
+    public bool running_dialogue { get; protected set; } = false;
     IEnumerator RunDialogueStep(List<string> lines)
     {
+        running_dialogue = true;
         Queue<string> dialogue_queue = new Queue<string>(lines);
 
         while (dialogue_queue.Count > 0)
@@ -79,6 +80,7 @@ public class UIManager : Service
             yield return null;
         }
         dialogue_on = false;
+        running_dialogue = false;
     }
 
     public override void GameStartInitialize()

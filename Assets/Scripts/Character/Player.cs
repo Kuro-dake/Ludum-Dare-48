@@ -18,6 +18,15 @@ public class Player : Character
 
     public void Movement(Vector2 dir)
     {
-        transform.position += dir.Vector3() * Time.deltaTime * speed;
+        Vector3 npos = transform.position + dir.Vector3() * Time.deltaTime * speed;
+        npos.x = Mathf.Clamp(npos.x, LevelGM.cam_bounds.min.x + 1f, LevelGM.cam_bounds.max.x - 1f);
+        transform.position = npos;
+        
+    }
+
+    protected override void Die()
+    {
+        SC.controls.active = false;
+        SC.game.LoadScene("Level");
     }
 }

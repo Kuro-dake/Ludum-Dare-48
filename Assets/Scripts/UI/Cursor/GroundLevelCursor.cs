@@ -10,9 +10,17 @@ public class GroundLevelCursor : GameCursor
     protected override void LeftHold()
     {
         base.LeftHold();
+        if (!SC.controls.active)
+        {
+            return;
+        }
         if(attack_delay <= 0f)
         {
-            Carrier.Create(GM.player.aim_transform.position, AttackData.Create(0, "hit", GM.player), Camera.main.ScreenToWorldPoint(Input.mousePosition), "stun");
+            Vector3 mousePosition = Input.mousePosition;
+
+            mousePosition.z = mousePosition.z - (Camera.main.transform.position.z - 45);
+
+            Carrier.Create(GM.player.aim_transform.position, AttackData.Create(1, "hit", GM.player), Camera.main.ScreenToWorldPoint(mousePosition), "bullet");
             attack_delay = SC.player_stats.attack_delay;
         }
         

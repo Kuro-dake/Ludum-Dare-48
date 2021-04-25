@@ -41,6 +41,12 @@ TagManager:
   - name: Sky
     uniqueID: 197940319
     locked: 0
+  - name: Mountains
+    uniqueID: 252581643
+    locked: 0
+  - name: Trees
+    uniqueID: 1487985003
+    locked: 0
   - name: Background
     uniqueID: 4087823075
     locked: 0

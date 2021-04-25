@@ -5,7 +5,7 @@ using UnityEngine;
 public class GM : MonoBehaviour
 {
 
-    static GM inst;
+    protected static GM inst;
     protected Player _player;
     public static Player player => inst._player;
 

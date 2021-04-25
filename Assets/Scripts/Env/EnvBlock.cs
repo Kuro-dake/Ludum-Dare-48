@@ -36,7 +36,7 @@ public class EnvBlock : MonoBehaviour
             triggered_colliders.Remove(c2d);
         }
         
-        triggered_colliders.Add(c2d, SC.env.CreateAdjecentEnvBlock(this, left));
+        //triggered_colliders.Add(c2d, SC.env.CreateAdjecentEnvBlock(this, left));
     }
     [SerializeField]
     int dispbn;

@@ -27,20 +27,70 @@ public class EnvManager : Service
         env_layer_mask = LayerMask.GetMask(new string[] { "Environment" });
 
     }
-
-    public EnvBlock CreateAdjecentEnvBlock(EnvBlock e, bool left)
+    [System.NonSerialized]
+    int block_number = 0;
+    [System.NonSerialized]
+    bool triggered = false;
+    [SerializeField]
+    float camera_center_plus_block_trigger = 20f;
+    public override void Update()
     {
-        EnvBlock neb = Instantiate(env_block_prefab, e.transform.position + env_block_width * (left ? -1 : 1) * Vector3.right, Quaternion.identity);
-        neb.Initialize(e);
-
-        if (SC.enemies.SpawnBlockEnemies(neb.block_number))
+        base.Update();
+        if(LevelGM.player.transform.position.x > LevelGM.cam_bounds.center.x + camera_center_plus_block_trigger && !triggered)
         {
-            SC.ui.RunDialogue(SC.enemies.GetBlockPresetByNumber(neb.block_number).dialogue_lines);
+            triggered = true;
+            ProgressEnvironment();
+        }
+    }
+
+    public void RestartLevel()
+    {
+        block_number = 0;
+        Debug.Log("restarted level");
+    }
+
+    void ProgressEnvironment()
+    {
+        StartCoroutine(ProgressEnvironmentStep());
+    }
+
+    IEnumerator ProgressEnvironmentStep()
+    {
+        if (SC.enemies.GetBlockPresetByNumber(block_number) == null)
+        {
+            Debug.LogError("finish level");
+            yield break;
         }
         
+        SC.ui.RunDialogue(SC.enemies.GetBlockPresetByNumber(block_number).dialogue_lines);
+        SC.controls.active = false;
+        while (SC.ui.running_dialogue)
+        {
+            yield return null;
+        }
+        SC.controls.active = true;
+        yield return new WaitForSeconds(.5f);
+        SC.enemies.SpawnBlockEnemies(block_number);
         
-        return neb;
+
+        LevelGM.UpdateCameraConfines(true);
+
+        StartCoroutine(WaitForBlockFinish());
     }
+
+    IEnumerator WaitForBlockFinish()
+    {
+        while (SC.enemies.in_combat)
+        {
+            yield return null;
+        }
+        
+        LevelGM.UpdateCameraConfines();
+
+        block_number++;
+        triggered = false;
+    }
+
 
     
 

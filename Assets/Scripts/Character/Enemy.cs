@@ -16,10 +16,21 @@ public abstract class Enemy : Character
 
     protected abstract IEnumerator Pursue();
 
+    static List<Enemy> _all_enemies = new List<Enemy>();
+    public static List<Enemy> all_enemies
+    {
+        get
+        {
+            _all_enemies.RemoveAll(e => e == null);
+            return new List<Enemy>(_all_enemies);
+        }
+    }
+
     public override void Initialize()
     {
         base.Initialize();
         StartPursuit();
+        _all_enemies.Add(this);
     }
     public string pursuit_routine => "pursuit_" + GetHashCode();
     void StartPursuit()
@@ -64,7 +75,10 @@ public abstract class Enemy : Character
         }
         
     }
-
+    private void OnDestroy()
+    {
+        StopPursuit();
+    }
     protected override void Die()
     {
         base.Die();

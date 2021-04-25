@@ -14,6 +14,10 @@ public class GroundEnemy : Enemy
                 yield return null;
             }
             yield return new WaitForSeconds(pursuit_delay);
+            if(transform == null)
+            {
+                yield break;
+            }
             MoveTo(Vector2.MoveTowards(GM.player.transform.position, transform.position, 1f));
             while (SC.routines.IsRunning(char_movement_routine_name))
             {

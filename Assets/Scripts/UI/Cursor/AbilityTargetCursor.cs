@@ -7,8 +7,12 @@ public class AbilityTargetCursor : GameCursor
     protected override void LeftClick()
     {
         base.LeftClick();
-        SC.ui.ability_target_promise.val = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        SC.ui.SwitchCursor(UIManager.cursor_type.ground);
+        if (!AbilitiesBlock.over)
+        {
+            SC.ui.ability_target_promise.val = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            SC.ui.SwitchCursor(UIManager.cursor_type.ground);
+        }
+        
     }
 
     protected override void RightClick()

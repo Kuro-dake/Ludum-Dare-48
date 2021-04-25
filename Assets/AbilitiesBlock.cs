@@ -5,10 +5,11 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 public class AbilitiesBlock : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-
+    public static bool over;
     public void OnPointerEnter(PointerEventData data)
     {
         SC.ui.SwitchCursor(UIManager.cursor_type.ui);
+        over = true;
     }
 
     public void OnPointerExit(PointerEventData data)
@@ -17,6 +18,7 @@ public class AbilitiesBlock : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         {
             SC.ui.SwitchCursor(UIManager.cursor_type.ground);
         }
+        over = false;
     }
 
     [SerializeField]
@@ -36,9 +38,10 @@ public class AbilitiesBlock : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         public bool holdable = false;
         public Ability ability;
     }
-
+    static AbilitiesBlock inst;
     private void Start()
     {
+        inst = this;
         Initialize();
     }
 
@@ -47,11 +50,7 @@ public class AbilitiesBlock : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         foreach(UIButtonAction a in actions)
         {
             UIButton ngo = Instantiate(ability_button_prefab, buttons_parent);
-            ngo.GetComponent<Button>().onClick.AddListener(a.action.Invoke);
-            if(a.ability != null)
-            {
-                ngo.GetComponent<Button>().onClick.AddListener(a.ability.Cast);
-            }
+            ngo.GetComponent<Button>().onClick.AddListener(ngo.Trigger);
             
             ngo.action = a;
             ngo.Initialize(this);

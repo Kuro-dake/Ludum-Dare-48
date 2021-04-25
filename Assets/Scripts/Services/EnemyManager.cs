@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using YamlDotNet.RepresentationModel;
+using System.Linq;
 [CreateAssetMenu(fileName = "EnemyManager", menuName = "Service/EnemyManager", order = 0)]
 
 public class EnemyManager : Service
@@ -27,22 +28,56 @@ public class EnemyManager : Service
         //block_presets.ForEach(b => b.enemies.ForEach(e => Debug.Log(e.type)));
 
     }
-    public BlockPreset GetBlockPresetByNumber(int number) => block_presets[number];
-    public bool SpawnBlockEnemies(int block_number)
+    public BlockPreset GetBlockPresetByNumber(int number) => number < block_presets.Count ? block_presets[number] : null;
+
+    IEnumerator SpawnBlockEnemiesStep(int block_number)
     {
         if (block_presets.Count <= block_number || block_number < 0)
         {
-            return false;
+            yield break;
         }
+        in_combat = true;
         Debug.Log("spawned bn " + block_number);
         BlockPreset bp = GetBlockPresetByNumber(block_number);
 
-        foreach(EnemyPreset ep in bp.enemies)
+        Dictionary<int, List<EnemyPreset>> ens_by_wave = new Dictionary<int, List<EnemyPreset>>();
+
+        foreach (EnemyPreset ep in bp.enemies)
         {
-            Generate(ep.type, GM.player.transform.position + ep.position.Vector3());
+            if (!ens_by_wave.ContainsKey(ep.wave))
+            {
+                ens_by_wave.Add(ep.wave, new List<EnemyPreset>());
+            }
+            ens_by_wave[ep.wave].Add(ep);
+            
+        }
+        
+        List<KeyValuePair<int, List<EnemyPreset>>> ens_list = ens_by_wave.ToList();
+        ens_list.Sort((a, b) => a.Key.CompareTo(b.Key));
+
+        foreach(List<EnemyPreset> ep_list in ens_list.ConvertAll(kv => kv.Value))
+        {
+            foreach(EnemyPreset ep in ep_list)
+            {
+                Generate(ep.type, GM.player.transform.position + ep.position.Vector3());
+                yield return new WaitForSeconds(.3f);
+            }
+            while(Enemy.all_enemies.Count > 0)
+            {
+                yield return null;
+            }
+            yield return new WaitForSeconds(2f);
         }
 
-        return true;
+        in_combat = false;
 
     }
+
+    public void SpawnBlockEnemies(int block_number)
+    {
+        StartCoroutine(SpawnBlockEnemiesStep(block_number));
+
+    }
+
+    public bool in_combat { get; protected set; } = false;
 }
