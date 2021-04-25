@@ -28,7 +28,16 @@ public class EnvManager : Service
 
     }
     [System.NonSerialized]
-    int block_number = 0;
+    int _block_number = 0;
+    int block_number
+    {
+        get => _block_number;
+        set
+        {
+            _block_number = value;
+            Debug.Log("set bn to " + value);
+        }
+    }
     [System.NonSerialized]
     bool triggered = false;
     [SerializeField]
@@ -46,12 +55,13 @@ public class EnvManager : Service
     public void RestartLevel()
     {
         block_number = 0;
+        triggered = false;
         Debug.Log("restarted level");
     }
 
-    void ProgressEnvironment()
+    public void ProgressEnvironment()
     {
-        StartCoroutine(ProgressEnvironmentStep());
+        StartCoroutine(ProgressEnvironmentStep(), progenv_routine);
     }
 
     IEnumerator ProgressEnvironmentStep()
@@ -75,9 +85,14 @@ public class EnvManager : Service
 
         LevelGM.UpdateCameraConfines(true);
 
-        StartCoroutine(WaitForBlockFinish());
+        yield return WaitForBlockFinish(); 
     }
-
+    public void StopProgenv()
+    {
+        StopCoroutine(progenv_routine);
+        SC.enemies.StopSpawnblock();
+    }
+    const string progenv_routine = "wfb_envman";
     IEnumerator WaitForBlockFinish()
     {
         while (SC.enemies.in_combat)

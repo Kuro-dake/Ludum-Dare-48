@@ -20,6 +20,7 @@ public class LevelGM : GM
 
         SC.env.RestartLevel();
 
+        //SC.env.ProgressEnvironment();
     }
 
     static Bounds _cam_bounds;

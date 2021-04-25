@@ -56,7 +56,10 @@ public class Character : MonoBehaviour
     {
         while(this != null && (!airborne || move_type == movement_type.floating) && !stunned && Vector2.Distance(transform.position, to) > 0f)
         {
+            orientation_left = transform.position.x > to.x;
             transform.position = Vector3.MoveTowards(transform.position, to, Time.deltaTime * speed);
+            walking = true;
+            
             yield return null;
         }
     }
@@ -86,7 +89,23 @@ public class Character : MonoBehaviour
     }
     public bool stunned => stun_duration > 0f;
     public bool airborne => transform.position.y > SC.env.ground_y;
-    // Update is called once per frame
+    Animator anim => GetComponent<Animator>();
+    protected bool walking = false;
+    protected Transform shake_parent => transform.Find("shake_parent");
+    protected bool orientation_left
+    {
+        set
+        {
+            if(shake_parent == null)
+            {
+                return;
+            }
+            shake_parent.localScale = new Vector3(value ? -1f : 1f, 1f, 1f);
+            return;
+            new List<SpriteRenderer>(shake_parent?.GetComponentInChildren<StaticPSDAnimation>().GetComponentsInChildren<SpriteRenderer>(true)).
+                ForEach(sr => sr.flipX = value);
+        }
+    }
     protected virtual void Update()
     {
         if(move_type == movement_type.ground)
@@ -96,6 +115,17 @@ public class Character : MonoBehaviour
             transform.position = pos;
         }
         stun_duration -= Time.deltaTime;
+        
+    }
+
+    protected void LateUpdate()
+    {
+        Debug.Log(anim);
+        if (anim != null)
+        {
+            anim.SetBool("walking", walking);
+        }
+        walking = false;
     }
 
     protected virtual void Die()

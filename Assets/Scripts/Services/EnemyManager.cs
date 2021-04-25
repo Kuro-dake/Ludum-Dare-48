@@ -29,7 +29,7 @@ public class EnemyManager : Service
 
     }
     public BlockPreset GetBlockPresetByNumber(int number) => number < block_presets.Count ? block_presets[number] : null;
-
+    const string spawnblock_routine = "sbes_routine";
     IEnumerator SpawnBlockEnemiesStep(int block_number)
     {
         if (block_presets.Count <= block_number || block_number < 0)
@@ -72,10 +72,14 @@ public class EnemyManager : Service
         in_combat = false;
 
     }
-
+    public void StopSpawnblock()
+    {
+        StopCoroutine(spawnblock_routine);
+        in_combat = false;
+    }
     public void SpawnBlockEnemies(int block_number)
     {
-        StartCoroutine(SpawnBlockEnemiesStep(block_number));
+        StartCoroutine(SpawnBlockEnemiesStep(block_number), spawnblock_routine);
 
     }
 

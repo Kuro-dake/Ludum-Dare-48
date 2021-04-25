@@ -3,7 +3,7 @@ level:
   - dialogue:
      - "Halt"
     enemies:
-     - type: floatershooter1
+     - type: enemy1
        hp: 3
        position: 5, 5
 #  - dialogue: 
