@@ -21,6 +21,12 @@ MonoBehaviour:
     - first: bullet
       second: {fileID: 827372096345035850, guid: 0e4676d39b87fb9479907c7da0c17add, type: 3}
     - first: stun
-      second: {fileID: 827372096345035850, guid: 55d9bfa2017f0c64a840392387cd910a, type: 3}
+      second: {fileID: 827372096345035850, guid: 73e5ef54c5e4fbe47b55c1a6b3f713ff, type: 3}
     - first: laser
       second: {fileID: 827372096345035850, guid: fbdf22b50710df24ea38c6c31cc18143, type: 3}
+    - first: player_bullet
+      second: {fileID: 827372096345035850, guid: 1cc217871cd42a343b3e69db7bf25634, type: 3}
+    - first: fireball
+      second: {fileID: 827372096345035850, guid: bd2d37d101bd7044d918ec75462a22b6, type: 3}
+    - first: enemy_bullet
+      second: {fileID: 827372096345035850, guid: d34b70f02d6335145bbc5c47c22039aa, type: 3}

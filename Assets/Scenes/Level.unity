@@ -15009,8 +15009,8 @@ MonoBehaviour:
   _name: 
   description: 
   cooldown: 5
-  active: 0
-  needle_delay: 0.25
+  active: 1
+  needle_delay: 0.15
   needle_number: 10
 --- !u!1 &231534915
 GameObject:
@@ -20412,7 +20412,7 @@ MonoBehaviour:
         m_Calls: []
     icon: {fileID: 0}
     text: 
-    holdable: 1
+    holdable: 0
     ability: {fileID: 583787499}
   - shortcut: 50
     action:
@@ -20464,7 +20464,7 @@ MonoBehaviour:
         m_Calls: []
     icon: {fileID: 0}
     text: 
-    holdable: 1
+    holdable: 0
     ability: {fileID: 2059932528}
   - shortcut: 97
     action:
@@ -21331,7 +21331,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.18, y: 2.26, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 528588366}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21347,6 +21348,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 156d39f486c74f34b883133d2d4c82dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &528588365
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 528588366}
+  - component: {fileID: 528588367}
+  m_Layer: 0
+  m_Name: forest_screen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &528588366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528588365}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.38}
+  m_LocalScale: {x: 54.9, y: 26.24, z: 1}
+  m_Children: []
+  m_Father: {fileID: 519420032}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &528588367
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528588365}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 1487985003
+  m_SortingLayer: -2
+  m_SortingOrder: -434
+  m_Sprite: {fileID: 21300000, guid: b4ff91459ea641f4b8d122235c5ba1a1, type: 3}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &572967132
 GameObject:
   m_ObjectHideFlags: 0
@@ -33468,10 +33551,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ed69a782910f4428e69ab1bb5bb35f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
-  description: 
-  cooldown: 5
-  active: 0
+  _name: Shield
+  description: "Upon casting this spell, shield protects you from the next 10 points
+    of damage. \"The dev team\" (the dev individual) wasn't willing to think about
+    how to make it so the player isn't immortal all the time, since it (still talking
+    about the dev individual) slept for about three hours tonight. \n\nThat's why
+    it's cooldown is so atrociously high. Wanna be immortal? Wait for a minute and
+    a half after every casting. Whatever. You won't need it anyway. It's just a nice
+    spell to have in the game."
+  cooldown: 90
+  active: 1
   shield_value: 10
 --- !u!1 &1379344919
 GameObject:
@@ -34163,6 +34252,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree_prefab: {fileID: 2417038066707540023, guid: a1ff5229f69eae74f995050a4fcd8c1f, type: 3}
+  forest_screen: {fileID: 528588366}
+  size_divider: 100
 --- !u!114 &1758515203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49604,10 +49695,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 118ed9806b252e9469efe21eff53c7f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
-  description: 
-  cooldown: 5
-  active: 0
+  _name: Stun
+  description: Stun allows you to... well... stun your enemies. It enables you to
+    shoot projectiles charged with negative energy that expand into a barrier, and
+    stun your enemies upon entering it's range. The projectiles will fly towards
+    and expand at the position of your mouse cursor. You can build a wall of stun
+    barriers to manage your enemies.
+  cooldown: 0
+  active: 1
 --- !u!1 &2063694013
 GameObject:
   m_ObjectHideFlags: 0
@@ -50139,33 +50234,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 540521798797288410, guid: 94770fddeb3d51846a64787ebbc4eb39, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 540521798797288410, guid: 94770fddeb3d51846a64787ebbc4eb39, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 540521798797288410, guid: 94770fddeb3d51846a64787ebbc4eb39, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 540521798797288410, guid: 94770fddeb3d51846a64787ebbc4eb39, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 540521798797288410, guid: 94770fddeb3d51846a64787ebbc4eb39, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4523375140667061041, guid: 94770fddeb3d51846a64787ebbc4eb39, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4523375140667061041, guid: 94770fddeb3d51846a64787ebbc4eb39, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4523375140667061047, guid: 94770fddeb3d51846a64787ebbc4eb39, type: 3}
       propertyPath: m_LocalPosition.x

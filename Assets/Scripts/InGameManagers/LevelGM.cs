@@ -20,6 +20,7 @@ public class LevelGM : GM
         SC.enemies.InitLevel();
         SC.env.RestartLevel();
         SC.env.TriggerStartBlock();
+        FindObjectOfType<AbilityInventory>().ResetAbilities();
         //SC.env.ProgressEnvironment();
     }
 

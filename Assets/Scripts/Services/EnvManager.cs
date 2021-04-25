@@ -29,7 +29,9 @@ public class EnvManager : Service
         env_layer_mask = LayerMask.GetMask(new string[] { "Environment" });
 
     }
-    public string level_file { get; protected set; } = "level_1";
+    [System.NonSerialized]
+    int level = 1;
+    public string level_file => "level_" + level.ToString();
     public void TriggerStartBlock()
     {
         BlockPreset bp = Entity.Create<BlockPreset>(Setup.GetSetup(level_file).GetChainedNode<YamlMappingNode>("level:start"));
@@ -60,10 +62,11 @@ public class EnvManager : Service
             ProgressEnvironment();
         }
     }
-
+    [SerializeField]
+    int dev_start_block_number = 0;
     public void RestartLevel()
     {
-        block_number = 0;
+        block_number = dev_start_block_number;
         triggered = false;
         Debug.Log("restarted level");
     }
@@ -76,12 +79,6 @@ public class EnvManager : Service
     GroundItem ground_item_prefab;
     IEnumerator ProgressEnvironmentStep(BlockPreset set_bp = null)
     {
-        if (SC.enemies.GetBlockPresetByNumber(block_number) == null)
-        {
-            Debug.LogError("finish level");
-            yield break;
-        }
-
         BlockPreset bp = set_bp == null ? SC.enemies.GetBlockPresetByNumber(block_number) : set_bp;
 
         SC.ui.RunDialogue(bp.dialogue_lines);
@@ -129,7 +126,14 @@ public class EnvManager : Service
             block_number++;
             triggered = false;
         }
-        
+
+        if (SC.enemies.GetBlockPresetByNumber(block_number) == null)
+        {
+            level++;
+            SC.game.LoadScene("Level");
+         
+        }
+
     }
 
 

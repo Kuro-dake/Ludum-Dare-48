@@ -34,7 +34,7 @@ public class PlayParticleSystemEffect : Effect
         }
     }
     public ParticleSystem ps { get { return GetComponent<ParticleSystem>(); } }
-
+    public float original_scale = 1f;
     public override void Play(Vector2 position)
     {
         base.Play(position);
@@ -44,7 +44,7 @@ public class PlayParticleSystemEffect : Effect
             StartCoroutine(WaitToStop());
         }
         speed = 1f;
-        transform.localScale = Vector3.one;
+        transform.localScale = Vector3.one * original_scale;
     }
 
     public override void Stop()

@@ -12,4 +12,12 @@ public class PlayerStatsManager : Service
     [SerializeField]
     List<Ability> abilities;
 
+    public Dictionary<string, bool> owned_abilities = new Dictionary<string, bool>();
+
+    public override void GameStartInitialize()
+    {
+        base.GameStartInitialize();
+        owned_abilities.Add(typeof(FlashAbility).ToString(), true);
+        //owned_abilities.Clear();
+    }
 }

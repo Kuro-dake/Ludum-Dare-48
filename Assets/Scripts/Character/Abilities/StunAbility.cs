@@ -19,7 +19,13 @@ public class StunAbility : Ability
         {
             yield break;
         }
-        Carrier.Create(origin + Random.insideUnitCircle * .5f, AttackData.Create(0, "stun", GM.player), target, "stun");
+        for(int i = 0; i < 20; i++)
+        {
+            
+            Carrier.Create(origin + Random.insideUnitCircle * .5f, AttackData.Create(0, "stun", GM.player), Camera.main.ScreenToWorldPoint(Input.mousePosition), "stun");
+            yield return new WaitForSeconds(.05f);
+        }
+        
         
         
     }

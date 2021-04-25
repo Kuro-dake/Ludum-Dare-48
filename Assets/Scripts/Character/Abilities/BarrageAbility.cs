@@ -36,7 +36,7 @@ public class BarrageAbility : Ability
         e.transform.localScale = Vector3.one * .8f;
         for (int i = 0; i < needle_number; i++)
         {
-            Carrier.Create(origin + Random.insideUnitCircle * .5f, AttackData.Create(1, "hit_needle", GM.player), target, "laser");
+            Carrier.Create(origin + Random.insideUnitCircle * .5f, AttackData.Create(1, "hit", GM.player), target, "laser");
             yield return new WaitForSeconds(needle_delay);
         }
         e.Stop();

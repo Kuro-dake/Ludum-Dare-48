@@ -143,13 +143,13 @@ public class EnemyPreset : Entity
     public int bullets_number => node.TryGetInt("bullets", 1);
     public float bullet_delay => node.TryGetFloat("bullet_delay", .3f);
 
-    public string bullet_type => node.TryGet("bullet_type", "bullet");
+    public string bullet_type => node.TryGet("bullet_type", "enemy_bullet");
 
     public float attack_range => node.TryGetFloat("attack_range", 1f);
     public float attack_delay => node.TryGetFloat("attack_delay", 1f);
 
     public FloatRange angle_range => node.TryGetFloatRange("angle_range", -.15f, .15f);
-    public FloatRange radius_range => node.TryGetFloatRange("angle_range", 5f, 7f);
+    public FloatRange radius_range => node.TryGetFloatRange("radius_range", 5f, 7f);
 
     public float move_speed => node.TryGetInt("move_speed", 5);
 

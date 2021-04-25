@@ -1,0 +1,165 @@
+level:
+ start:
+  nothing: n
+#  dialogue:
+#   - "And so you embarked on your journey into the deep dark forest."
+#   - "Use your mouse to aim.\nClick to shoot.\nA and D to move."
+ blocks:
+
+  - enemies:
+     - id: melee_3
+       position: 5,5
+       wave: 1
+
+  - item:
+      dialogue: 
+       - "You find anothe reflective note on a scroll by none other than the good old someone. \"I've had enough. I'm gonna buy some new clothes tomorrow.\"" #'
+       - "The letters are large, thick and agressive. The author was obviously fed up with wearing the same clothes as everyone else. From the little you can decypher, the scroll contained the maic incantation for achieving ultimate power."
+       - "Unfortunately, the spell is irreparably damaged."
+       - "You notice another spell on the other side of the scroll.\nAccording to the author, it's a failed attempt at creating a magical discoball by opening a small portal to the laser dimension."
+       - "Well... this won't be of much use at the next party, but you could do some serious damage with this spell."
+      effect: ability_barrage
+
+  - enemies:
+     - id: melee_3
+       position: -5,5
+       wave: 1
+     - id: melee_3
+       position: 5,5
+       wave: 1
+
+  - enemies:
+     - id: melee_3
+       position: -6,5
+       wave: 1
+     - id: melee_3
+       position: 6,5
+       wave: 1
+     - id: kamikaze_3
+       position: 0,7
+       wave: 1
+
+  - enemies:
+     - id: melee_3
+       position: -6,5
+       wave: 1
+     - id: melee_3
+       position: 6,5
+       wave: 1
+     - id: melee_3
+       position: -7,5
+       wave: 1
+     - id: melee_3
+       position: 7,5
+       wave: 1
+     - id: kamikaze_3
+       position: 0,7
+       wave: 1
+
+  - dialogue:
+    - "Okay, this is getting tiresome... yet again."
+    enemies:
+     - id: melee_3
+       position: -6,5
+       wave: 1
+     - id: melee_3
+       position: 6,5
+       wave: 1
+     - id: melee_3
+       position: -7,5
+       wave: 1
+     - id: melee_3
+       position: 7,5
+       wave: 1
+     - id: kamikaze_3
+       position: 0,7
+       wave: 1
+
+  - dialogue:
+    - "You see another scroll far ahead. A wave of resentment runs over you, and you start to get really angry. You're determined to go home if this one contains another stupid inspirobot BS."
+    - "Your process of self-irritation is interrupted by another swarm of flying fireball shooting nothing to do with your journey enemies."
+    - "(Starting to see a patern? It almost seems like the dev individual copy-pasted the level files, so it didn't have to think of new enemy constellations. Because that's really really really difficult.)"
+    enemies: 
+     - id: shooter_3
+       position: -8,8
+       wave: 1
+     - id: shooter_3
+       position: -7,8
+       wave: 1
+     - id: shooter_3
+       position: -6,8
+       wave: 1
+     - id: shooter_3
+       position: -5,8
+       wave: 1
+     - id: shooter_3
+       position: 8,8
+       wave: 1
+     - id: shooter_3
+       position: 7,8
+       wave: 1
+     - id: shooter_3
+       position: 6,8
+       wave: 1
+     - id: shooter_3
+       position: 5,8
+       wave: 1
+ 
+     - id: shooter_3
+       position: -8,8
+       wave: 2
+     - id: shooter_3
+       position: -7,8
+       wave: 2
+     - id: shooter_3
+       position: -6,8
+       wave: 2
+     - id: shooter_3
+       position: -5,8
+       wave: 2
+     - id: shooter_3
+       position: 8,8
+       wave: 2
+     - id: shooter_3
+       position: 7,8
+       wave: 2
+     - id: shooter_3
+       position: 6,8
+       wave: 2
+     - id: shooter_3
+       position: 5,8
+       wave: 2
+ 
+     - id: shooter_3
+       position: -8,8
+       wave: 3
+     - id: shooter_3
+       position: -7,8
+       wave: 3
+     - id: shooter_3
+       position: -6,8
+       wave: 3
+     - id: shooter_3
+       position: -5,8
+       wave: 3
+     - id: shooter_3
+       position: 8,8
+       wave: 3
+     - id: shooter_3
+       position: 7,8
+       wave: 3
+     - id: shooter_3
+       position: 6,8
+       wave: 3
+     - id: shooter_3
+       position: 5,8
+       wave: 3
+
+
+
+  - item:
+      dialogue: 
+       - "You reach the final reflective note scroll, written by the same someone that led you on the wild goosechase across the universe."
+       - "\"Psychopaths...\", you start reading... Then you peripherally notice 'inspirobot.com' written in the lower right corner." 
+       - "\"Psychopaths want to penetrate you\"" 
+       - "You have no choice. You promised yourself this would be the last one, but you really need that inspirational quote. Now you have to travel even deeper into the multiverse, to a parallel dimension where the ultimatest Forest of Deepest possible philosophy is rumored to be."

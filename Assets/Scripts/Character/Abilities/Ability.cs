@@ -12,7 +12,7 @@ public abstract class Ability : MonoBehaviour
     [TextArea(10,10)]
     public string description;
     [SerializeField]
-    float cooldown = 5f;
+    public float cooldown = 5f;
     public float current_cooldown { get; protected set; }
     public bool active = false;
     public bool ready { get => current_cooldown <= 0f && active; }
@@ -33,5 +33,5 @@ public abstract class Ability : MonoBehaviour
         current_cooldown -= Time.deltaTime;
     }
 
-
+    public string type => GetType().ToString();
 }

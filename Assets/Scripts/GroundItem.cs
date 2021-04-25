@@ -58,7 +58,7 @@ public class GroundItem : MonoBehaviour
     {
         
         string ability_prefix = "ability_";
-        if (effect.Substring(0, ability_prefix.Length) == ability_prefix)
+        if (effect.Substring(0, Mathf.Clamp(ability_prefix.Length, 0, effect.Length)) == ability_prefix)
         {
             string aname = effect.Replace(ability_prefix, "");
             Ability a = FindObjectOfType<AbilityInventory>().Activate(aname);
@@ -76,7 +76,9 @@ public class GroundItem : MonoBehaviour
 
         switch (effect)
         {
-            
+            case "no_cooldowns":
+                FindObjectOfType<AbilityInventory>().NoCooldownsAllUnlock();
+                break;
         }
     }
 

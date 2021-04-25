@@ -8,7 +8,7 @@ enemy_presets:
     type: GroundMelee
     hp: 5
     pursuit_delay: .2,.3
-  - id: float_shooter_1
+  - id: shooter_1
     type: FloatingShooter
     hp: 3
     pursuit_delay: .4,1
@@ -29,7 +29,7 @@ enemy_presets:
     attack: 2
     pursuit_delay: .2,.3
     scale_range: 1.2,1.3
-  - id: float_shooter_2
+  - id: shooter_2
     type: FloatingShooter
     hp: 6
     pursuit_delay: .4,.8
@@ -51,7 +51,7 @@ enemy_presets:
     attack: 4
     pursuit_delay: .2,.3
     scale_range: 1.5,1.6
-  - id: float_shooter_3
+  - id: shooter_3
     type: FloatingShooter
     hp: 10
     pursuit_delay: .2,.3
@@ -61,3 +61,16 @@ enemy_presets:
     scale_range: 1.5,1.6
     move_shoot_delay: .2,.3
     bullet_spread: .6
+
+  - id: final_boss
+    type: FinalBoss
+    hp: 1000
+    move_speed: 15
+    pursuit_delay: 1.2,2.3
+    bullets: 25
+    bullet_delay: .05
+    bullet_type: fireball
+    scale_range: 2.5,2.6
+    move_shoot_delay: .5,.7
+    bullet_spread: 9.6
+    radius_range: 10,15

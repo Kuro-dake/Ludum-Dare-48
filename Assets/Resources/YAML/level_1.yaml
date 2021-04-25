@@ -6,11 +6,7 @@ level:
 #   - "Use your mouse to aim.\nClick to shoot.\nA and D to move."
  blocks:
 #level 1
-#  - item:
-#      dialogue: 
-#       - "You find someone's reflective note on a scroll: \"Why do we all dress the same?\"" 
-#       - "\"Is it because we all look the same?\""
-#      effect: ability_barrage
+
   - dialogue:
      - "You didn't even reach the forest before encountering the first random enemies that have nothing to do with your journey."
     enemies:
@@ -18,9 +14,10 @@ level:
        position: 5,5
        wave: 1
 
+
   - enemies:
      - id: melee_1
-       position: -5,5
+       position: 6,5
        wave: 1
      - id: melee_1
        position: 5,5
@@ -28,20 +25,41 @@ level:
 
   - enemies:
      - id: melee_1
-       position: -6,5
+       position: 5,5
        wave: 1
      - id: melee_1
        position: 6,5
        wave: 1
      - id: kamikaze_1
-       position: 0,7
+       position: 0,8
        wave: 1
 
-  - dialogue:
-    - "Okay, this is getting tiresome."
+  - enemies:
+     - id: melee_1
+       position: 5,5
+       wave: 1
+     - id: melee_1
+       position: 6,5
+       wave: 1
+     - id: melee_1
+       position: 7,5
+       wave: 1
+     - id: kamikaze_1
+       position: 0,7
+       wave: 1
+     - id: shooter_1
+       position: -2,8
+       wave: 1       
+
+  - item:
+      dialogue: 
+       - "You find someone's reflective note on a scroll:\n\"Why do we all dress the same?\nIs it because we're all the same?\"" #'
+       - "This deep philosophical reflection (okay, not really deep) is scribbled over a stun spell incantation. The author obviously valued cheap observations over ancient magic."
+      effect: ability_stun
+
     enemies:
      - id: melee_1
-       position: -6,5
+       position: 5,5
        wave: 1
      - id: melee_1
        position: 6,5
@@ -74,10 +92,33 @@ level:
      - id: kamikaze_1
        position: 0,7
        wave: 1
+#2 wave
+     - id: melee_1
+       position: -6,5
+       wave: 2
+     - id: melee_1
+       position: 6,5
+       wave: 2
+     - id: melee_1
+       position: -7,5
+       wave: 2
+     - id: melee_1
+       position: 7,5
+       wave: 2
+     - id: kamikaze_1
+       position: 2,7
+       wave: 2         
+     - id: shooter_1
+       position: 0,7
+       wave: 2          
+     - id: kamikaze_1
+       position: -2,7
+       wave: 2              
 
 
   - item:
       dialogue: 
-       - "You find someone's reflective note on a scroll: \"Why do we all dress the same?\"" 
-       - "\"Is it because we all look the same?\""
-      effect: ability_barrage
+       - "You find a scroll with a quote" 
+       - "\"Work harder, not harder.\""
+       - "Sounds like BS, and doesn't make any sense. Your hunger for motivational quotes is unquenched. You set your sights to the stars."
+       - "You travel across deeper into space, to the other side of the galaxy, searching for some other Forest of Deep Philosophy."

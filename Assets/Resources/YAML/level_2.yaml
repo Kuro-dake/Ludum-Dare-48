@@ -1,0 +1,162 @@
+level:
+ start:
+  nothing: n
+#  dialogue:
+#   - "And so you embarked on your journey into the deep dark forest."
+#   - "Use your mouse to aim.\nClick to shoot.\nA and D to move."
+ blocks:
+
+  - enemies:
+     - id: melee_2
+       position: 5,5
+       wave: 1
+
+  - item:
+      dialogue: 
+       - "You find someone's reflective note on a scroll: \"Seriously, what's with the same outfits?\"" #'
+       - "The author once again scribbled his thoughts over a spell scroll. This time it's shield magic."
+      effect: ability_shield
+
+  - enemies:
+     - id: melee_2
+       position: -5,5
+       wave: 1
+     - id: melee_2
+       position: 5,5
+       wave: 1
+
+  - enemies:
+     - id: melee_2
+       position: -6,5
+       wave: 1
+     - id: melee_2
+       position: 6,5
+       wave: 1
+     - id: kamikaze_2
+       position: 0,7
+       wave: 1
+
+  - enemies:
+     - id: melee_2
+       position: -6,5
+       wave: 1
+     - id: melee_2
+       position: 6,5
+       wave: 1
+     - id: melee_2
+       position: -7,5
+       wave: 1
+     - id: melee_2
+       position: 7,5
+       wave: 1
+     - id: kamikaze_2
+       position: 0,7
+       wave: 1
+
+  - dialogue:
+    - "Okay, this is getting tiresome... again."
+    enemies:
+     - id: melee_2
+       position: -6,5
+       wave: 1
+     - id: melee_2
+       position: 6,5
+       wave: 1
+     - id: melee_2
+       position: -7,5
+       wave: 1
+     - id: melee_2
+       position: 7,5
+       wave: 1
+     - id: kamikaze_2
+       position: 0,7
+       wave: 1
+
+  - dialogue:
+    - "You see a scroll far ahead. Could contain the motivational quote you traveled half the galaxy to get to?"
+    - "Your hopes and dreams are interrupted by a swarm of flying fireball shooting nothing to do with your journey enemies."
+    - "(Now that you think of it, there's really lot of violent hooligans that attack you for no reason at all in this universe.)"
+    enemies: 
+     - id: shooter_2
+       position: -8,8
+       wave: 1
+     - id: shooter_2
+       position: -7,8
+       wave: 1
+     - id: shooter_2
+       position: -6,8
+       wave: 1
+     - id: shooter_2
+       position: -5,8
+       wave: 1
+     - id: shooter_2
+       position: 8,8
+       wave: 1
+     - id: shooter_2
+       position: 7,8
+       wave: 1
+     - id: shooter_2
+       position: 6,8
+       wave: 1
+     - id: shooter_2
+       position: 5,8
+       wave: 1
+ 
+     - id: shooter_2
+       position: -8,8
+       wave: 2
+     - id: shooter_2
+       position: -7,8
+       wave: 2
+     - id: shooter_2
+       position: -6,8
+       wave: 2
+     - id: shooter_2
+       position: -5,8
+       wave: 2
+     - id: shooter_2
+       position: 8,8
+       wave: 2
+     - id: shooter_2
+       position: 7,8
+       wave: 2
+     - id: shooter_2
+       position: 6,8
+       wave: 2
+     - id: shooter_2
+       position: 5,8
+       wave: 2
+ 
+     - id: shooter_2
+       position: -8,8
+       wave: 3
+     - id: shooter_2
+       position: -7,8
+       wave: 3
+     - id: shooter_2
+       position: -6,8
+       wave: 3
+     - id: shooter_2
+       position: -5,8
+       wave: 3
+     - id: shooter_2
+       position: 8,8
+       wave: 3
+     - id: shooter_2
+       position: 7,8
+       wave: 3
+     - id: shooter_2
+       position: 6,8
+       wave: 3
+     - id: shooter_2
+       position: 5,8
+       wave: 3
+
+
+
+  - item:
+      dialogue: 
+       - "You find another reflective note on a scroll. You recognize the author of previous scroll by their handwriting."
+       - "\"Those who object to inequality, accept puberty.\"" 
+       - "Seriously... what the hell? Sounds like something one would get from inspirobot on a second try. *wink wink, nudge nudge*."
+       - "Your hunger for a good inspirational quote grows almost unbearable. You decide to travel even deeper to space, to the other side of the universe, where the ultimate Forest of Deep philosophy is rumored to be."

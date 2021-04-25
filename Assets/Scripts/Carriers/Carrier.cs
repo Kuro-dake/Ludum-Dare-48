@@ -8,7 +8,18 @@ public class Carrier : MonoBehaviour, PoolableInterface
     [SerializeField]
     float speed = 20f, affect_every_seconds = .3f, impact_lifetime = 1f;
     float lifetime;
-    public bool is_active { get => gameObject.activeSelf; protected set => gameObject.SetActive(value); }
+    public bool is_active
+    {
+        get => gameObject.activeSelf;
+        protected set
+        {
+            gameObject.SetActive(value);
+            if (!value)
+            {
+                DetachVisuals();
+            }
+        }
+    }
     bool arrived = false;
     // Update is called once per frame
     [SerializeField]
@@ -25,6 +36,8 @@ public class Carrier : MonoBehaviour, PoolableInterface
         
         is_active = false;
     }
+    [SerializeField]
+    float noise;
     void Update()
     {
         if(lifetime <= 0f)
@@ -34,7 +47,11 @@ public class Carrier : MonoBehaviour, PoolableInterface
         switch (impact)
         {
             case impact_type.explode:
-                transform.position = Vector2.MoveTowards(transform.position, target, Time.deltaTime * speed);
+                if (arrived)
+                {
+                    break;
+                }
+                transform.position = Vector2.MoveTowards(transform.position, target, Time.deltaTime * speed) + (Random.insideUnitCircle * noise);
                 if (Vector2.Distance(transform.position, target) < .1f && !arrived)
                 {
                     Arrived();
@@ -43,15 +60,17 @@ public class Carrier : MonoBehaviour, PoolableInterface
                 break;
             case impact_type.on_hit:
 
-                Vector2 direction = (target - orig_pos).normalized * Time.deltaTime * speed;
+                Vector2 direction = (target - orig_pos).normalized * Time.deltaTime * speed + (Random.insideUnitCircle * noise);
                 RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, Time.deltaTime * speed);
                 foreach(RaycastHit2D hit in hits)
                 {
                     Character c = hit.collider.GetComponent<Character>();
                     if (c != null && c.is_alive && (attack_data.origin is Player && c != attack_data.origin || c is Player && attack_data.origin != GM.player) )
                     {
+                        attack_data.impact_point = hit.point;
                         Affect(c);
                         if (!piercing) {
+
                             is_active = false;
                             return;
                         }
@@ -66,8 +85,22 @@ public class Carrier : MonoBehaviour, PoolableInterface
                     
                 }
                 break;
-    }
+        }
         
+    }
+    void DetachVisuals()
+    {
+        if(visuals == null)
+        {
+            return;
+        }
+        ParticleSystem ps = visuals.GetComponent<ParticleSystem>();
+        visuals.SetParent(null);
+
+        if(ps != null)
+        {
+            ps.Stop();
+        }
     }
     [SerializeField]
     bool affect_once = true;
@@ -75,6 +108,7 @@ public class Carrier : MonoBehaviour, PoolableInterface
     Dictionary<Character, float> affected_at = new Dictionary<Character, float>();
     [SerializeField]
     bool stun = false;
+    Transform visuals => transform.Find("Visual");
     protected virtual void Affect(Character c)
     {
         Debug.Log("affecting" + c);
@@ -122,6 +156,7 @@ public class Carrier : MonoBehaviour, PoolableInterface
     float explosion_scale = 3f, explosion_speed = 1f;
     protected void Arrived()
     {
+        DetachVisuals();
         StartCoroutine(ExplodeStep());
     }
 
@@ -134,24 +169,33 @@ public class Carrier : MonoBehaviour, PoolableInterface
         if (sr != null)
         {
             sr.sprite = SC.game["ring"];
-            sr.color = Color.Lerp(explosion_color, explosion_color_2, .5f) * 1.2f;
+            sr.color = Color.Lerp(explosion_color, explosion_color_2, .5f) * 1.4f - Color.black * .2f;
+            sr.enabled = true;
         }
         Effect e = SC.effects["explosion"];
         (e as Explosion).color_1 = explosion_color;
         (e as Explosion).color_2 = explosion_color_2;
         e.Play(transform.position);
+        float sr_color_speed = 1f * (explosion_speed / explosion_scale) * 1.2f;
         while (transform.localScale.x < explosion_scale)
         {
             transform.localScale = Vector3.one * Mathf.MoveTowards(transform.localScale.x, explosion_scale, Time.deltaTime * explosion_speed);
             /*Debug.Log(Character.all_characters.Count + " chars");
             Debug.Log(Character.all_characters.FindAll(c => Vector2.Distance(transform.position, c.transform.position) < explosion_scale).Count + " in range");*/
-            Character.all_characters.FindAll(c => Vector2.Distance(transform.position, c.transform.position) < transform.localScale.x * .5f)
-                .ForEach(c => Affect(c));
+
+            List<Collider2D> c2ds = new List<Collider2D>(Physics2D.OverlapCircleAll(transform.position, transform.localScale.x * .5f));
+
+            List<Character> cs = c2ds.ConvertAll(c2d => c2d.GetComponent<Character>());
+            cs.RemoveAll(c => c == null);
+            cs.ForEach(c => Affect(c));
+
+            /*Character.all_characters.FindAll(c => Vector2.Distance(transform.position, c.transform.position) < transform.localScale.x * .5f)
+                .ForEach(c => Affect(c));*/
             Debug.DrawRay(transform.position, Vector2.right * transform.localScale.x * .5f, Color.red);
 
-            e.transform.localScale = transform.localScale;
+            e.transform.localScale = transform.localScale * .3f;
 
-            sr.color -= Color.black * Time.deltaTime;
+            sr.color -= Color.black * Time.deltaTime * sr_color_speed;
 
             yield return null;
         }
@@ -190,7 +234,7 @@ public class Carrier : MonoBehaviour, PoolableInterface
 
         sr.color = Color.white;
 
-        sr.sortingLayerName = "AboveCharacters";
+        //sr.sortingLayerName = "AboveCharacters";
         /// endthispart
 
         return carrier;

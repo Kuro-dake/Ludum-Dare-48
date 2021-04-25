@@ -96,11 +96,22 @@ public class Character : MonoBehaviour
             {
                 remnant = 0;
             }
+            
         }
-        if(remnant > 0)
+        Explosion e = SC.effects["hit"] as Explosion;
+        
+        
+        if (remnant > 0)
         {
             Shake();
         }
+        else
+        {
+            e.color_1 = e.color_2 = Color.blue;
+        }
+
+        e.Play(ad.impact_point == default ? transform.position + Vector3.up * 1f : ad.impact_point);
+
         hp -= remnant;
         if (hp <= 0)
         {
@@ -165,7 +176,7 @@ public class Character : MonoBehaviour
 
         Shake();
 
-        yield return Fade(1f, 0f);
+        yield return Fade(1f, 0f, 10f);
 
         Destroy(gameObject);
     }

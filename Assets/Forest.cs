@@ -14,9 +14,11 @@ public class Forest : MonoBehaviour
         last_x_generated = cam_x;
     }
     //[SerializeField]
-    float density => (1000f - cam_x) / 100f;
-
-
+    float density => /*(1000f - cam_x) / 100f*/6f;
+    [SerializeField]
+    Transform forest_screen;
+    [SerializeField]
+    float size_divider = 50f;
     private void Update()
     {
         if(Mathf.Abs(last_x_generated - cam_x) > density)
@@ -39,12 +41,19 @@ public class Forest : MonoBehaviour
 
             et.transform.localPosition = pos;
 
-            et.transform.localScale = Vector3.one * Random.Range(.6f, .8f) / (density * .2f);
+            et.transform.localScale = Vector3.one * Random.Range(.6f, .8f) * cam_multiplier;
             et.transform.localRotation = Quaternion.Euler(Vector3.back * Random.Range(-15f, 15f));
             last_x_generated = cam_x;
 
             et.Initialize();
         }
+        forest_screen.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.clear, Color.black, (cam_multiplier - cm_min) / cm_diff);
     }
+
+    float cm_min = .3f;
+    float cm_max = 3f;
+    float cm_diff => cm_max - cm_min;
+
+    float cam_multiplier => Mathf.Clamp(cam_x / size_divider, cm_min, cm_max);
 
 }

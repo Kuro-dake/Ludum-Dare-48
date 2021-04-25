@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloatingShooterEnemy : Enemy
+public class FinalBoss : Enemy
 {
     protected override movement_type move_type => movement_type.floating;
     [SerializeField]
@@ -37,19 +37,19 @@ public class FloatingShooterEnemy : Enemy
     {
         while (true)
         {
-            
+
             yield return new WaitForSeconds(pursuit_delay);
-            
+
             MoveTo(FindPositionOnCircle(GM.player.transform.position, radius_range, angle_range));
             while (SC.routines.IsRunning(char_movement_routine_name))
             {
                 yield return null;
             }
             yield return new WaitForSeconds(move_shoot_delay);
-            
-            for(int i = 0;i<projectile_number; i++)
+            Vector3 target_pos = target.transform.position;
+            for (int i = 0; i < projectile_number; i++)
             {
-                Carrier.Create(transform.position, AttackData.Create(attack, "hit", this), target.transform.position + (Random.insideUnitCircle * spread).Vector3(), projectile_type);
+                Carrier.Create(transform.position, AttackData.Create(attack, "hit", this), target_pos  + (Random.insideUnitCircle * spread).Vector3(), projectile_type);
                 anim.SetTrigger("attack");
                 yield return new WaitForSeconds(projectile_delay);
             }
@@ -58,7 +58,7 @@ public class FloatingShooterEnemy : Enemy
 
     public static Vector3 FindPositionOnCircle(Vector3 center, float radius, float angle_modifier = 0f)
     {
-        
+
         float ang = (angle_modifier) * 360;
         Vector3 pos = new Vector3(center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad),
                                    center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad),

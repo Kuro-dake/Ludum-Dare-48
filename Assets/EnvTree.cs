@@ -7,7 +7,7 @@ public class EnvTree : MonoBehaviour
 
     float cam_x => Camera.main.transform.position.x;
 
-    public const float destroy_distance = 60f;
+    public const float destroy_distance = 40f;
     // Update is called once per frame
     void Update()
     {

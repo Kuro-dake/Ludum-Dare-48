@@ -19,5 +19,6 @@ MonoBehaviour:
   env_block_width: 30
   _ground_y: -3.14
   _fall_speed: 5
-  camera_center_plus_block_trigger: 8
+  camera_center_plus_block_trigger: 15
+  dev_start_block_number: 0
   ground_item_prefab: {fileID: 7499043634506941395, guid: 95989fbe677a84f46b17b4fefcb4cf92, type: 3}
