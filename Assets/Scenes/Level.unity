@@ -15078,9 +15078,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593e367b67fe4614f800b98e85f3bff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
-  description: 
-  cooldown: 0
+  _name: The Fireballs
+  description: 'Toss 10 exploding fireballs in quick succession.
+
+
+    Unlike your
+    basic attack or the laser dimension spell, each launched fireball will fly towards
+    the position of your mouse cursor where it''ll explode. Does three times the
+    damage your basic attack does, but you have to hit first.
+
+
+    Quite handy for
+    fighting airborne enemies. Thinking flak canon.'
+  cooldown: 5
   active: 1
   needle_delay: 0.15
   needle_number: 10
@@ -15241,7 +15251,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234005717}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2fba25a5cd15594e8f050a11e386c80, type: 3}
   m_Name: 
@@ -22402,9 +22412,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7652f66865e11564e82745c37c085189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
-  description: 
-  cooldown: 0
+  _name: Blink
+  description: 'This ability let''s you instantly change your position to the position
+    of your mouse cursor. You still remain on the ground though.
+
+
+    Kind of handy
+    if you ask me. Real fun to play with when there''s no cooldown.
+
+
+    No. I''m
+    not cancelling the cooldown.
+
+
+    Okay okay. Wait until the end of the game.'
+  cooldown: 5
   active: 1
   color_1: {r: 0.38039216, g: 1, b: 0.25882354, a: 1}
   color_2: {r: 0.99215686, g: 1, b: 0.4862745, a: 1}

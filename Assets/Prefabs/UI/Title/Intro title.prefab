@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 72}
+  m_AnchoredPosition: {x: 225, y: 72}
   m_SizeDelta: {x: 1000, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4390379534329828509
@@ -65,8 +65,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You embark on the journey into deep space, into even deeper forests, to
-    find the answers to the deepest philosophical questions.
+  m_text: "Sophia, also spelled Sofia, is a feminine given name, from Greek \u03A3\u03BF\u03C6\u03AF\u03B1,
+    Soph\xEDa, \"Wisdom\".\n\nSo-so-phia, also spelled So-so-phia, is a gender neutral
+    name, not from Greek \u03A3\u03BF\u03C6\u03AF\u03B1, Soph\xEDa, \"Wisdom\", but
+    it is close enough."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -93,8 +95,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 68.44
-  m_fontSizeBase: 68.44
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

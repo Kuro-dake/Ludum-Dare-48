@@ -1,14 +1,18 @@
 level:
  start:
   nothing: n
-#  dialogue:
-#   - "And so you embarked on your journey into the deep dark forest."
-#   - "Use your mouse to aim.\nClick to shoot.\nA and D to move."
+  dialogue:
+   - "And so So-so-phia..."
+   - "Damn that sounds weird..."
+   - "Nevermind. So, So-so-phia embarked on a journey into the Deep Forest of Deep Philosophy...\n\nTo find some motivational quotes it could print and hang on the wall."
+   - "Use your mouse to aim.\nClick to shoot.\nA and D to move."
+   - "You can also use W and S keys to wiggle where you're currently standing. \n\nIt was meant as controls for space battles, but there wasn't time for the dev team (refered to from here on out as the dev indiviual because of the team size) to implement space battles."
+   - "And the dev individual couldn't be bothered to remove the functionality."
  blocks:
 #level 1
 
   - dialogue:
-     - "You didn't even reach the forest before encountering the first random enemies that have nothing to do with your journey."
+     - "So-so-phia didn't even reach the forest before encountering the first random enemy that has nothing to do with it's journey."
     enemies:
      - id: melee_1
        position: 5,5
@@ -53,8 +57,12 @@ level:
 
   - item:
       dialogue: 
-       - "You find someone's reflective note on a scroll:\n\"Why do we all dress the same?\nIs it because we're all the same?\"" #'
-       - "This deep philosophical reflection (okay, not really deep) is scribbled over a stun spell incantation. The author obviously valued cheap observations over ancient magic."
+       - "(The following is by no means a fourth-wall stunt by the dev individual to excuse the variability (or lack thereof) of character models. Everything you see and will see is exactly as intended.)"
+       - "(Including the typos and grammatical errors.)"
+       - "(And bugs)"
+       - "(Especially the bugs)"
+       - "So-so-phia finds someone's reflective note on a scroll:\n\"Why do we all dress the same?\nIs it because we're all the same?\"" #'
+       - "This deep philosophical reflection (okay, not really that deep of a reflection) is scribbled over a stun spell incantation. The author obviously valued his cheap observations over ancient magic."
       effect: ability_stun
 
     enemies:
@@ -75,7 +83,9 @@ level:
        wave: 1
 
   - dialogue:
-    - "Okay, this is getting tiresome."
+    - "So-so-phia wonders when it'll get to magically murder the random enemies unrelated to it's journey less and read motivational quotes more."
+    - "It doesn't say anything to the player though, since it doesn't want to appear ungrateful."
+    - "Also because it lacks the ability to talk."
     enemies:
      - id: melee_1
        position: -6,5
@@ -118,7 +128,7 @@ level:
 
   - item:
       dialogue: 
-       - "You find a scroll with a quote" 
+       - "So-so-phia finds a scroll with a quote." 
        - "\"Work harder, not harder.\""
-       - "Sounds like BS, and doesn't make any sense. Your hunger for motivational quotes is unquenched. You set your sights to the stars."
-       - "You travel across deeper into space, to the other side of the galaxy, searching for some other Forest of Deep Philosophy."
+       - "Which sounds like total BS, since it doesn't make any sense. So-so-phia's hunger for motivational quotes is unquenched. It sets it's sights to the stars."
+       - "It travels into space, deeper and deeper (5* for theme) to the other side of the galaxy, searching for Deeper Forest of Deep Philosophy."

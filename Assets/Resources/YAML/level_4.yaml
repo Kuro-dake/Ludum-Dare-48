@@ -1,31 +1,33 @@
 level:
  start:
   nothing: n
-#  dialogue:
-#   - "And so you embarked on your journey into the deep dark forest."
-#   - "Use your mouse to aim.\nClick to shoot.\nA and D to move."
+  dialogue:
+   - "\"This is a pretty funky dimension.\" - So-so-phia thinks to itself."
+
  blocks:
 
   - item:
       dialogue: 
+       - "There's a note written on the scroll."
        - "\"This is a different universe. There are different rules of magic. Nothing except laser dimension portal and flash works, but your cooldowns no longer apply.\"" #'
-       - "Reading the scroll, you realize this is a different universe. That nothing except laser dimension portal and flash works, but that your cooldowns no longer apply."
+       - "Reading the scroll, So-so-phia realizes this is a different universe. That nothing except laser dimension portal and flash will work, but that it's cooldowns no longer apply."
+
       effect: no_cooldowns
 
   - dialogue:
-       - "You hear a voice:"
+       - "So-so-phia hears a voice:"
        - "\"I didn't find anything.\""
        - "\"There is not a single clothing store in the multiverse that sells anything except these robes. I have to wear the same thing everyone else does.\"" #'
        - "\"And now this. I know what you want! You want my utlimate quote from my ultimate scroll, don't you? Well you're not getting it! I have to wear the same thing everyone else does, so I'm keeping my unique wisdom!\""
-       - "You're pretty sure this is the good old someone, the author of the notes. You finally meet him... and he attacks you without another word."
-       - "It's not like you were going to force him to tell you the quote. But he doesn't care. That's just the type of person he is. \n\nAnd that's how life is sometimes." #'
-       
+       - "So-so-phia is pretty sure this is the good old someone, the author of the notes. So-so-phia finally meets him... and he attacks it without another word."
+       - "It's not like So-so-phia was going to force good old Someone to tell it the quote or give up the scroll or anything. But he doesn't care. That's just the type of person good old Someone is. \n\nBecause that's how people and life sometimes are." #'
+
     enemies:
      - id: final_boss
        position: 10,2
        wave: 1
 
   - dialogue:
-      - "You destroyed the Scroll of the Ultimate Quote along with the good old someone. Although the ultimate scroll with the ultimate motivational quote is gone forever and you have no way of knowing what it read, you're pretty sure it was just another stupid BS from inspirobot."
-      - "You suddenly realize you've accomplished nothing, and this was all a collosal waste of time (and also self respect)."
-      - "You decide to go home, and forget this multiversal fiasco."
+      - "So-so-phia destroyed the Scroll of the Ultimate Quote along with the good old Someone. Although the ultimate scroll with the ultimate motivational quote is gone forever and So-so-phia has no way of knowing what it read, So-so-phia is pretty sure it was just another stupid BS from inspirobot."
+      - "So-so-phia suddenly realizes it has accomplished nothing, and this was all a collosal waste of time (and self respect)."
+      - "So-so-phia decides to go home, and forget this multiversal fiasco."

@@ -14,9 +14,9 @@ public class TitleGM : GM
     protected override void Start()
     {
         base.Start();
-
+        SC.env.active = false;
         title_text_prefabs_queue = new Queue<ListGO>(title_text_prefabs);
-
+        SC.ui.SwitchCursor(UIManager.cursor_type.star);
         StartCoroutine(IntroProgression());
     }
 

@@ -57,14 +57,14 @@ enemy_presets:
     pursuit_delay: .2,.3
     bullets: 8
     bullet_delay: .15
-    bullet_type: exploder
+    bullet_type: fireball
     scale_range: 1.5,1.6
     move_shoot_delay: .2,.3
     bullet_spread: .6
 
   - id: final_boss
     type: FinalBoss
-    hp: 1000
+    hp: 1
     move_speed: 15
     pursuit_delay: 1.2,2.3
     bullets: 25

@@ -75,6 +75,7 @@ public class EnvManager : Service
     public override void Update()
     {
         base.Update();
+        
         if(LevelGM.player.transform.position.x > LevelGM.cam_bounds.center.x + camera_center_plus_block_trigger && !triggered)
         {
             triggered = true;
@@ -155,8 +156,17 @@ public class EnvManager : Service
 
         if (SC.enemies.GetBlockPresetByNumber(block_number) == null)
         {
-            level++;
-            SC.game.LoadScene("Level");
+            if (level < 4)
+            {
+                level++;
+                SC.game.LoadScene("Level");
+            }
+            else
+            {
+                active = false;
+                SC.ui.SwitchCursor(UIManager.cursor_type.star);
+                SC.game.LoadScene("Ending");
+            }
          
         }
 

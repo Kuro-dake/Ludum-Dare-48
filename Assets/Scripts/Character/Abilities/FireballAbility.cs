@@ -24,7 +24,7 @@ public class FireballAbility : Ability
         for (int i = 0; i < needle_number; i++)
         {
             Vector2 origin = GM.player.aim_transform.position;
-            Carrier.Create(origin + Random.insideUnitCircle * .5f, AttackData.Create(1, "hit", GM.player), target_vector, "fireball");
+            Carrier.Create(origin + Random.insideUnitCircle * .5f, AttackData.Create(3, "hit", GM.player), target_vector, "fireball");
             yield return new WaitForSeconds(needle_delay);
             target_vector = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }

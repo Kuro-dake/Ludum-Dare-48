@@ -105,7 +105,7 @@ public class EnemyManager : Service
         base.Update();
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Enemy.all_enemies.ForEach(e => e.ReceiveAttack(AttackData.Create(100, "hit", GM.player)));
+            //Enemy.all_enemies.ForEach(e => e.ReceiveAttack(AttackData.Create(100, "hit", GM.player)));
         }
     }
     public bool in_combat { get; protected set; } = false;

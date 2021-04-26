@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 804f516552f9c5540ac8d66d522082f3, type: 3}
   m_Name: EffectsManager
   m_EditorClassIdentifier: Assembly-CSharp::EffectsManager
   _active: 1
@@ -17,4 +17,8 @@ MonoBehaviour:
   effects: []
   prefab_effects:
   - first: explosion
-    second: {fileID: 4069440548282762295, guid: 82252ccde051df4479ed53d56dd24371, type: 3}
+    second: {fileID: 2128301725, guid: 82252ccde051df4479ed53d56dd24371, type: 3}
+  - first: hit
+    second: {fileID: 2128301725, guid: be8f497cda4188f4a9e75785052fc316, type: 3}
+  - first: shield
+    second: {fileID: -3200967978905273494, guid: b7a40c407090fbc40bf9bb090f1f05d9, type: 3}

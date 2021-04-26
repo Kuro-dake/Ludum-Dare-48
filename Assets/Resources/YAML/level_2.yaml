@@ -1,19 +1,24 @@
 level:
  start:
   nothing: n
-#  dialogue:
-#   - "And so you embarked on your journey into the deep dark forest."
-#   - "Use your mouse to aim.\nClick to shoot.\nA and D to move."
+  dialogue:
+   - "So-so-phia arrives at one particular planet on the other side of the galaxy."
+   - "So-so-phia expected there would be different music playing."
+   - "The dev individual has no comments to offer on that."
+
  blocks:
 
-  - enemies:
+  - dialogue:
+     - "So-so-phia travels halfway across the galaxy, just to find the same-looking random assholes that have nothing to do with it's journey."
+     - "The dev individual has no comments to offer on that either."
+    enemies:
      - id: melee_2
        position: 5,5
        wave: 1
 
   - item:
       dialogue: 
-       - "You find someone's reflective note on a scroll: \"Seriously, what's with the same outfits?\"" #'
+       - "So-so-phia finds someone's reflective note on a scroll: \"Seriously, what's with the same outfits?\"" #'
        - "The author once again scribbled his thoughts over a spell scroll. This time it's shield magic."
       effect: ability_shield
 
@@ -35,6 +40,13 @@ level:
      - id: kamikaze_2
        position: 0,7
        wave: 1
+
+  - item:
+      dialogue: 
+       - "So-so-phia finds a spell scroll on the ground. 'What is it doing on the ground?' thinks So-so-phia." #'
+       - "That's easy."
+       - "The dev individual needed to squeeze the spell somewhere. So here it is. You're welcome. And so is So-so-phia."
+      effect: ability_fireball
 
   - enemies:
      - id: melee_2
@@ -73,9 +85,9 @@ level:
        wave: 1
 
   - dialogue:
-    - "You see a scroll far ahead. Could contain the motivational quote you traveled half the galaxy to get to?"
-    - "Your hopes and dreams are interrupted by a swarm of flying fireball shooting nothing to do with your journey enemies."
-    - "(Now that you think of it, there's really lot of violent hooligans that attack you for no reason at all in this universe.)"
+    - "So-so-phia sees a scroll far ahead. Could it contain the motivational quote So-so-phia traveled the galaxy to get to?"
+    - "So-so-phia's hopes and dreams are interrupted by a swarm of flying fireball shooting nothing to do with So-so-phia's journey enemies."
+    - "(Now that So-so-phia thinks of it, there's really lot of violent hooligans that attack So-so-phia for no reason at all in this universe.)"
     enemies: 
      - id: shooter_2
        position: -8,8
@@ -156,7 +168,7 @@ level:
 
   - item:
       dialogue: 
-       - "You find another reflective note on a scroll. You recognize the author of previous scroll by their handwriting."
+       - "So-so-phia finds another reflective note on a scroll. It recognizes the author of previous scroll by their handwriting."
        - "\"Those who object to inequality, accept puberty.\"" 
-       - "Seriously... what the hell? Sounds like something one would get from inspirobot on a second try. *wink wink, nudge nudge*."
-       - "Your hunger for a good inspirational quote grows almost unbearable. You decide to travel even deeper to space, to the other side of the universe, where the ultimate Forest of Deep philosophy is rumored to be."
+       - "Seriously... what the hell? Sounds like something one would get from inspirobot on the first 'generate'. *wink wink, nudge nudge*."
+       - "So-so-phia's hunger for a good inspirational quote grows almost unbearable. So-so-phia decides to travel even deeper to space, to the other side of the universe, where the Ultimate Forest of Deep philosophy is rumored to be."
