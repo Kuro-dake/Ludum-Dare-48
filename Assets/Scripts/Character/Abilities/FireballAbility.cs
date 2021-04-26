@@ -25,6 +25,7 @@ public class FireballAbility : Ability
         {
             Vector2 origin = GM.player.aim_transform.position;
             Carrier.Create(origin + Random.insideUnitCircle * .5f, AttackData.Create(3, "hit", GM.player), target_vector, "fireball");
+            SC.sounds.PlayResource("player_shoot", .3f, new FloatRange(.9f, 1.1f));
             yield return new WaitForSeconds(needle_delay);
             target_vector = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }

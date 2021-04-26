@@ -21,6 +21,7 @@ public class PlayerStatsManager : Service
         owned_abilities.Add(typeof(FireballAbility).ToString(), true);
         owned_abilities.Add(typeof(StunAbility).ToString(), true);
 
+
         //owned_abilities.Clear();
     }
 }

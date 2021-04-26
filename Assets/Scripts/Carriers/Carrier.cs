@@ -178,7 +178,7 @@ public class Carrier : MonoBehaviour, PoolableInterface
         (e as Explosion).color_2 = explosion_color_2;
         e.Play(transform.position);
         float sr_color_speed = 1f * (explosion_speed / explosion_scale) * 1.2f;
-
+        SC.sounds.PlayResource(stun ? "stun" : "explosion", stun ? .2f : .3f, new FloatRange(.9f, 1.1f));
         Light2D l2d = GetComponent<Light2D>();
         if(l2d != null)
         {

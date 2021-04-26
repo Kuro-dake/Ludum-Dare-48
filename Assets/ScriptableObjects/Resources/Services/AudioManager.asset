@@ -15,7 +15,7 @@ MonoBehaviour:
   _active: 1
   service_transform_prefab: {fileID: 0}
   clips: []
-  max_sources: 5
+  max_sources: 50
   movement_sound_range:
     first: 1
     second: 1.2

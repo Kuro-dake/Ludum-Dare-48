@@ -103,6 +103,7 @@ public class Character : MonoBehaviour
         
         if (remnant > 0)
         {
+            SC.sounds.PlayResource("Explosion2", .3f, new FloatRange(.9f,1.1f));
             Shake();
         }
         else

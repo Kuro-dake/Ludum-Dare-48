@@ -75,6 +75,7 @@ public class UIManager : Service
 
         while (dialogue_queue.Count > 0)
         {
+            SC.sounds.PlayResource("dialogue", .3f, new FloatRange(.9f, 1.1f));
             ShowDialogueLine(dialogue_queue.Dequeue());
             yield return SC.controls.WaitForSpacebar();
             yield return null;

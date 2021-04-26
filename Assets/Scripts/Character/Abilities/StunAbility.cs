@@ -23,6 +23,7 @@ public class StunAbility : Ability
         {
             
             Carrier.Create(origin + Random.insideUnitCircle * .5f, AttackData.Create(0, "stun", GM.player), Camera.main.ScreenToWorldPoint(Input.mousePosition), "stun");
+            SC.sounds.PlayResource("player_shoot", .3f, new FloatRange(.9f, 1.1f));
             yield return new WaitForSeconds(.05f);
         }
         

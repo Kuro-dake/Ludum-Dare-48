@@ -14,6 +14,7 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             _action = value;
             GetComponentInChildren<TextMeshProUGUI>().text = action.shortcut.KeyShortcut();
+            transform.Find("icon").GetComponent<Image>().sprite = action.icon;
         }
     }
     public void Initialize(AbilitiesBlock parent)

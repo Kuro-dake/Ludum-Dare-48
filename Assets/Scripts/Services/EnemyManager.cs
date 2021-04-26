@@ -43,50 +43,59 @@ public class EnemyManager : Service
         {
             yield break;
         }*/
-        in_combat = true;
-        
-        Dictionary<int, List<EnemyPositionPreset>> ens_by_wave = new Dictionary<int, List<EnemyPositionPreset>>();
 
-        foreach (EnemyPositionPreset ep in bp.enemies)
+
+        if (bp.enemies.Count > 0)
         {
-            if (!ens_by_wave.ContainsKey(ep.wave))
-            {
-                ens_by_wave.Add(ep.wave, new List<EnemyPositionPreset>());
-            }
-            ens_by_wave[ep.wave].Add(ep);
-            
-        }
-        
-        List<KeyValuePair<int, List<EnemyPositionPreset>>> ens_list = ens_by_wave.ToList();
-        ens_list.Sort((a, b) => a.Key.CompareTo(b.Key));
-        center.y = SC.env.ground_y;
-        foreach(List<EnemyPositionPreset> ep_list in ens_list.ConvertAll(kv => kv.Value))
-        {
-            foreach(EnemyPositionPreset ep in ep_list)
-            {
-                Explosion e = SC.effects["explosion"] as Explosion;
+            in_combat = true;
+            SC.sounds.PlayMusic("combat", 10f);
 
-                e.speed = 2f;
 
-                e.color_1 = e.color_2 = Color.black;
-                e.lifetime = .5f;
-                e.Play(center + ep.position.Vector3() + Vector3.up * .7f);
-                yield return new WaitForSeconds(.5f);
+            Dictionary<int, List<EnemyPositionPreset>> ens_by_wave = new Dictionary<int, List<EnemyPositionPreset>>();
 
-                Generate(ep, center + ep.position.Vector3());
-                //yield return new WaitForSeconds(.3f);
-            }
-            while(Enemy.all_enemies.Count > 0)
+            foreach (EnemyPositionPreset ep in bp.enemies)
             {
-                yield return null;
+                if (!ens_by_wave.ContainsKey(ep.wave))
+                {
+                    ens_by_wave.Add(ep.wave, new List<EnemyPositionPreset>());
+                }
+                ens_by_wave[ep.wave].Add(ep);
+
             }
-            
-            yield return new WaitForSeconds(2f);
-            center = GM.player.transform.position;
+
+            List<KeyValuePair<int, List<EnemyPositionPreset>>> ens_list = ens_by_wave.ToList();
+            ens_list.Sort((a, b) => a.Key.CompareTo(b.Key));
             center.y = SC.env.ground_y;
-        }
+            foreach (List<EnemyPositionPreset> ep_list in ens_list.ConvertAll(kv => kv.Value))
+            {
+                foreach (EnemyPositionPreset ep in ep_list)
+                {
+                    Explosion e = SC.effects["explosion"] as Explosion;
+                    SC.sounds.PlayResource("explosion", .3f, new FloatRange(.9f, 1.1f));
+                    e.speed = 2f;
 
-        in_combat = false;
+                    e.color_1 = e.color_2 = Color.black;
+                    e.lifetime = .5f;
+                    e.Play(center + ep.position.Vector3() + Vector3.up * .7f);
+                    yield return new WaitForSeconds(.5f);
+
+                    Generate(ep, center + ep.position.Vector3());
+                    //yield return new WaitForSeconds(.3f);
+                }
+                while (Enemy.all_enemies.Count > 0)
+                {
+                    yield return null;
+                }
+
+                yield return new WaitForSeconds(2f);
+                center = GM.player.transform.position;
+                center.y = SC.env.ground_y;
+            }
+
+            in_combat = false;
+            SC.sounds.PlayMusic("theme", 10f);
+
+        }
 
     }
     public void StopSpawnblock()

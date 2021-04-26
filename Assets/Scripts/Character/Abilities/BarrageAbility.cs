@@ -37,6 +37,7 @@ public class BarrageAbility : Ability
         for (int i = 0; i < needle_number; i++)
         {
             Carrier.Create(origin + Random.insideUnitCircle * .5f, AttackData.Create(1, "hit", GM.player), target, "laser");
+            SC.sounds.PlayResource("laser", .3f, new FloatRange(.9f, 1.1f));
             yield return new WaitForSeconds(needle_delay);
         }
         e.Stop();

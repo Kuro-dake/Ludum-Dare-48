@@ -38,9 +38,11 @@ public class GroundItem : MonoBehaviour
             yield return null;
         }
         TriggerEffect();
+        SC.sounds.PlayResource("pickup", .3f, new FloatRange(.5f, .6f));
         yield return Fade(1f, 0f);
         
-        if(result_dialogue.Count > 0)
+
+        if (result_dialogue.Count > 0)
         {
             SC.ui.RunDialogue(result_dialogue);
             while (SC.ui.running_dialogue)

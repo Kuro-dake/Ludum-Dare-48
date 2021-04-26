@@ -38,6 +38,7 @@ public class FlashAbility : Ability
         e.lifetime = .1f;
         e.speed = 3f;
         e.transform.localScale = Vector3.one * 1.3f;
+        SC.sounds.PlayResource("explosion", .3f, new FloatRange(.9f, 1.1f));
     }
 
 }

@@ -22,6 +22,7 @@ public class GroundLevelCursor : GameCursor
 
             Carrier.Create(GM.player.aim_transform.position, AttackData.Create(1, "hit", GM.player), Camera.main.ScreenToWorldPoint(mousePosition), "player_bullet");
             attack_delay = SC.player_stats.attack_delay;
+            SC.sounds.PlayResource("player_shoot", .3f, new FloatRange(.9f, 1.1f));
         }
         
 

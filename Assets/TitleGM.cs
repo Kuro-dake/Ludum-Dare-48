@@ -18,6 +18,7 @@ public class TitleGM : GM
         title_text_prefabs_queue = new Queue<ListGO>(title_text_prefabs);
         SC.ui.SwitchCursor(UIManager.cursor_type.star);
         StartCoroutine(IntroProgression());
+        SC.sounds.PlayMusic("theme");
     }
 
     void ProgressIntro()

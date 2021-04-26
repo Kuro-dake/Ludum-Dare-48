@@ -49,7 +49,7 @@ public class EnvManager : Service
 
     }
     [System.NonSerialized]
-    int level = 4;
+    int level = 1;
     public string level_file => "level_" + level.ToString();
     public void TriggerStartBlock()
     {

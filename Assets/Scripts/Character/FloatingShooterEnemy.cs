@@ -51,6 +51,7 @@ public class FloatingShooterEnemy : Enemy
             {
                 Carrier.Create(transform.position, AttackData.Create(attack, "hit", this), target.transform.position + (Random.insideUnitCircle * spread).Vector3(), projectile_type);
                 anim.SetTrigger("attack");
+                SC.sounds.PlayResource("enemy_shoot", .3f, new FloatRange(.9f, 1.1f));
                 yield return new WaitForSeconds(projectile_delay);
             }
         }
